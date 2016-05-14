@@ -1,0 +1,495 @@
+@charset "utf-8";
+BODY {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	color: #333333;
+	text-decoration: none;
+	background-color: #FFFFFF;
+	margin: 0px;
+}
+.cms_menu_bg {
+	background-image: url(../images/menu_background.gif);
+	background-repeat: repeat;
+}
+.cms_menu_item {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: none;
+	color: #FFFFFF;
+	text-decoration: none;
+	padding-right: 5px;
+	padding-left: 5px;
+	text-align: center;
+	vertical-align: middle;
+}
+.success {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: none;
+	color: #090;
+	text-decoration: none;
+}
+.error {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: none;
+	color: #900;
+	text-decoration: none;
+}
+.cms_menu_link {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: none;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+
+.cms_header {
+	background-image: url(../images/header_background.gif);
+	background-repeat: repeat;
+	height: 79px;
+}
+.cms_header_text{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: none;
+	color: #FFFFFF;
+	text-decoration: none;
+	text-align: left;
+	vertical-align: middle;
+	padding-left: 14px;
+}
+.cms_header_link, .cms_header_link:active, .cms_header_link:visited{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: none;
+	color: #FFFFFF;
+	text-decoration: none;	
+}
+.cms_header_link:hover{
+	color: #99CCFF;
+}
+.cms_title{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: none;
+	color: #403F72;
+	text-decoration: none;
+	background-image: url(../images/title_background.gif);
+	background-repeat: repeat;
+	text-align: left;
+	vertical-align: middle;
+	text-indent: 5px;
+	height: 34px;
+}
+.cms_msg{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: none;
+	color: #009900;
+	text-decoration: none;
+	text-align: left;
+	vertical-align: middle;
+	text-indent: 5px;
+	height: 34px;
+}
+.cms_header_login{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	color: #FFFFFF;
+	text-decoration: none;
+	padding-right: 14px;
+}
+.cms_header_login_link, .cms_header_login_link:active, .cms_header_login_link:visited{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: none;
+	color: #99ccFF;
+	text-decoration: none;	
+}
+.cms_header_login_link:hover{
+	color: #FFFFFF;
+}
+.cms_form_text{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: none;
+	color: #666666;
+	text-decoration: none;
+	text-align: left;
+}
+.cms_form_box{
+	background-color: #FFFFFF;
+	padding: 2px;
+	border: 1px solid #999999;
+}
+.cms_login_field{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	color: #666666;
+	text-decoration: none;
+	background-color: #F2F2F2;
+	text-align: left;
+	vertical-align: middle;
+	padding: 2px;
+	width: 400px;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+.cms_form_field, .cms_input{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	color: #666666;
+	text-decoration: none;
+	background-color: #F2F2F2;
+	text-align: left;
+	vertical-align: middle;
+	padding: 2px;
+	width: 100%;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+.cms_login_link, .cms_login_link:active, .cms_login_link:visited{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: none;
+	color: #403F72;
+	text-decoration: none;
+}
+.cms_login_link:hover{
+	color: #99CCFF;
+}
+.cms_table_hdr{
+	background-image: url(../images/table_header_background.gif);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: none;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.cms_table_cell{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	color: #666666;
+	text-decoration: none;
+	padding-right: 10px;
+}
+.cms_table_row_one{
+	background-color:#FFFFFF;
+}
+.cms_table_row_two{
+	background-color:#F2F2F2;
+}
+.cms_table_row_hlt{
+	background-color:#99CCFF;
+}
+.cms_table_cell_link, .cms_table_cell_link:visited, .cms_table_cell_link:active{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	color: #403F72;
+	text-decoration: none;
+}
+.cms_table_cell_link:hover{
+	color: #FFFFFF;
+}
+.cms_text{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	color: #333333;
+	text-decoration: none;
+}
+.cms_link, .cms_link:active, .cms_link:visited{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: none;
+	color: 403f72;
+	text-decoration: none;
+}
+.cms_link:hover{
+	color: #99CCFF;
+	text-decoration: underline;
+}
+.dashboard_pages{
+	background-image: url(../images/dashboard_pages_bg.jpg);
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+.dashboard_media{
+	background-image: url(../images/dashboard_media_bg.jpg);
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+.dashboard_files{
+	background-image: url(../images/dashboard_files_bg.jpg);
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+.dashboard_contacts{
+	background-image: url(../images/dashboard_contacts_bg.jpg);
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+.dashboard_siteinfo{
+	background-image: url(../images/dashboard_siteinfo_bg.jpg);
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+.dashboard_users{
+	background-image: url(../images/dashboard_users_bg.jpg);
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+.cms_dashboard_title{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: none;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.cms_dashboard_text{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	color: #FFFFFF;
+	text-decoration: none;
+	text-align: justify;
+}
+.cms_dashboard{
+	background-color: #333333;
+	background-image: url(../images/dashboard_bg.gif);
+	background-repeat: repeat-x;
+	background-position: left top;
+}
+.cms_dashboard_link, .cms_dashboard_link:visited, .cms_dashboard_link:active{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: none;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.cms_dashboard_link:hover{
+	color:#99CCFF;
+}
+/*/////////////////////////////////////////////////////////////////////////////////////*/
+.chromestyle{
+width: 99%;
+font-weight: bold;
+}
+
+.chromestyle:after{
+content: "."; 
+display: block; 
+height: 0; 
+clear: both; 
+visibility: hidden;
+}
+
+.chromestyle ul{
+border: 1px solid #BBB;
+width: 100%;
+background: url(chromebg.gif) center center repeat-x;
+padding: 4px 0;
+margin: 0;
+text-align: center;
+}
+
+.chromestyle ul li{
+display: inline;
+}
+
+.chromestyle ul li a{
+color: #494949;
+padding: 4px 7px;
+margin: 0;
+text-decoration: none;
+border-right: 1px solid #DADADA;
+}
+
+/*.chromestyle ul li a:hover, .chromestyle ul li a.selected{ /*script dynamically adds a class of "selected" to the current ////active menu item
+background: url(chromebg-over.gif) center center repeat-x; /*THEME CHANGE HERE
+}*/
+
+/* ######### Style for Drop Down Menu ######### */
+
+.dropmenudiv{
+	position:absolute;
+	top: 0;
+	border: 1px solid #999999;
+	line-height:18px;
+	z-index:100;
+	width: 200px;
+	visibility: hidden;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	color: #FFFFFF;
+	text-decoration: none;
+	background-color: #F2F2F2;
+	/*background-image: url(../images/drop_menu_bg.jpg);*/
+	background-repeat: no-repeat;
+}
+
+
+.dropmenudiv a{
+	width: auto;
+	display: block;
+	text-indent: 3px;
+	padding: 2px 0;
+	text-decoration: none;
+	font-weight: bold;
+	color: #333333;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+}
+
+* html .dropmenudiv a{ /*IE only hack*/
+width: 100%;
+}
+
+.dropmenudiv a:hover{ /*THEME CHANGE HERE*/
+	background-color: #CCCCCC;
+	background-repeat: repeat;
+}
+
+.cms_image_link, .cms_image_link:active, .cms_image_link:visited {
+	color: #06C;
+	text-decoration: none;
+}
+.cms_image_link:hover{
+	color:#FFF;
+	text-decoration:underline;
+}.cms_image_name {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: none;
+	text-decoration: none;
+}
+.cms_cat_name {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	text-decoration: none;
+}

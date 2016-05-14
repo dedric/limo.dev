@@ -1,0 +1,13 @@
+@charset "utf-8";
+BODY {
+	background-color: #333333;
+	background-image: url(../images/dashboard_bg.gif);
+	background-repeat: repeat-x;
+	background-attachment: fixed;
+	margin: 5px;
+}
+.picker_thumb_bg {
+	background-image: url(../images/thumbnail_chooser_bg.gif);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
