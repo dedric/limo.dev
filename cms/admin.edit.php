@@ -1,4 +1,4 @@
-<?PHP
+<?php
 
 ///////MAKE SURE YOU ADD THIS ON EVERY PAGE//
 include("includes/admin_funcs.inc.php");  ///
@@ -29,8 +29,8 @@ echo('<table cellpadding="0" cellspacing="2" border="0" width="900">
 			  <td class="cms_table_hdr">Email</td>
 			  <td class="cms_table_hdr">Options</td></tr>');
 
-	$result = mysql_query("SELECT * from ".$prefix."_admin ORDER BY adminid ASC");
-	while($m = mysql_fetch_array($result)){
+	$result = mysqli_query("SELECT * from ".$prefix."_admin ORDER BY adminid ASC");
+	while($m = mysqli_fetch_array($result)){
 	  echo	('<tr ');
 		if($row_count == "0"){
 		   echo	('class="cms_table_row_one" onmouseover="this.className=\'cms_table_row_hlt\';" onmouseout="this.className=\'cms_table_row_one\';">');
@@ -108,7 +108,7 @@ function do_add_admins(){
         }
     $password = md5($password);
     
-    $sql =  mysql_query("INSERT INTO ".$prefix."_admin (fullname,admin_name,password,email,regdate) VALUES ('$fullname','$admin_name','$password','$email',NOW())") or die ("Error Adding Mod: ". mysql_error());
+    $sql =  mysqli_query("INSERT INTO ".$prefix."_admin (fullname,admin_name,password,email,regdate) VALUES ('$fullname','$admin_name','$password','$email',NOW())") or die ("Error Adding Mod: ". mysqli_error());
 
     msg_redirect(""._ADDED_SUCCESS."","admin.edit.php","2");
     
@@ -117,8 +117,8 @@ function do_add_admins(){
 function edit_admins() {
 	global $db,$prefix;
 
-        $result = mysql_query("SELECT * from ".$prefix."_admin WHERE adminid='".$_GET['adminid']."'");
-        $m = mysql_fetch_array($result);
+        $result = mysqli_query("SELECT * from ".$prefix."_admin WHERE adminid='".$_GET['adminid']."'");
+        $m = mysqli_fetch_array($result);
 
 echo	('<form method="POST" action="admin.edit.php" enctype="multipart/form-data">
 		  <table cellpadding="0" cellspacing="2" border="0">
@@ -153,10 +153,10 @@ function do_edit_admins(){
       global  $db,$prefix,$fullname,$admin_name,$password,$email,$adminid;
 
       if ($password == ""){
-      $sql =  mysql_query("UPDATE  ".$prefix."_admin SET  fullname='$fullname',admin_name='$admin_name',email='$email' where adminid='$adminid'") or die ("Error Editing admins: ". mysql_error());
+      $sql =  mysqli_query("UPDATE  ".$prefix."_admin SET  fullname='$fullname',admin_name='$admin_name',email='$email' where adminid='$adminid'") or die ("Error Editing admins: ". mysqli_error());
       }else{
       $password = md5($password);
-      $sql =  mysql_query("UPDATE  ".$prefix."_admin SET  fullname='$fullname',admin_name='$admin_name',password='$password',email='$email' where adminid='$adminid'") or die ("Error Editing admins: ". mysql_error());
+      $sql =  mysqli_query("UPDATE  ".$prefix."_admin SET  fullname='$fullname',admin_name='$admin_name',password='$password',email='$email' where adminid='$adminid'") or die ("Error Editing admins: ". mysqli_error());
       }
       
       msg_redirect(""._EDITED_SUCCESS."","admin.edit.php","2");
@@ -167,7 +167,7 @@ function del_admins(){
       if ($adminid == 1){
           die("You Cannot delete the Main Admin");
       }else{
-       $sql =  mysql_query("delete from  ".$prefix."_admin where adminid=".$_GET["delid"]."") or die ("Error del admins: ". mysql_error());
+       $sql =  mysqli_query("delete from  ".$prefix."_admin where adminid=".$_GET["delid"]."") or die ("Error del admins: ". mysqli_error());
       }
       msg_redirect(""._DELETED_SUCCESS."","admin.edit.php","2");
 }
@@ -212,4 +212,3 @@ include ('includes/ftr.inc.php');
       msg_redirect($error_msg,"index.php","1");
       exit();
 }
-?>

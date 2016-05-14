@@ -1,6 +1,4 @@
-<?
-
-
+<?php
 //skip the functions file if somebody call it directly from the browser.
 if (eregi("functions.php", $_SERVER['SCRIPT_NAME'])) {
     Header("Location: index.php"); die();
@@ -11,11 +9,14 @@ if (eregi("functions.php", $_SERVER['SCRIPT_NAME'])) {
 error_reporting(E_ALL ^ E_NOTICE);
 
 // Disable magic_quotes_runtime
-set_magic_quotes_runtime(0);
-
-if (!ini_get("register_globals")) {
-    import_request_variables('GPC');
+if(get_magic_quotes_runtime()){
+    // Deactivate
+    set_magic_quotes_runtime(false);
 }
+
+//if (!ini_get("register_globals")) {
+//    import_request_variables('GPC');
+//}
 
 $phpver = phpversion();
 if ($phpver < '4.1.0') {
@@ -83,7 +84,7 @@ if(!$db->db_connect_id) {
             <b>Connection to database has faild!<br>
             check mysql server/database name/username/password </center>
             <br><br><br><br><br><br><br><br><br>";
-              echo mysql_error();
+              echo mysqli_error();
       include("includes/ftr.inc.php");
       die();
 }
@@ -242,11 +243,11 @@ function do_login(){
 
          //encyrpt  password for more Security
          $md5_pass = md5($password);
-         $sql = mysql_query("SELECT * FROM ".$prefix."_admin WHERE admin_name='$admin_name' AND password='$md5_pass'");
-         $login_check = mysql_num_rows($sql);
+         $sql = mysqli_query("SELECT * FROM ".$prefix."_admin WHERE admin_name='$admin_name' AND password='$md5_pass'");
+         $login_check = mysqli_num_rows($sql);
          ///////////////////////////////////////////////////////////////////////
          if($login_check > 0){
-            while($row = mysql_fetch_array($sql)){
+            while($row = mysqli_fetch_array($sql)){
 
                  $adminid = $row['adminid'];
                  $admin_name = $row['admin_name'];
@@ -261,7 +262,7 @@ function do_login(){
 
                  setcookie("admin","$info",0);
 
-                 mysql_query("UPDATE ".$prefix."_admin SET ipaddress='$REMOTE_ADDR', lastlogin=NOW() WHERE adminid='$adminid'") or die (mysql_error());
+                 mysqli_query("UPDATE ".$prefix."_admin SET ipaddress='$REMOTE_ADDR', lastlogin=NOW() WHERE adminid='$adminid'") or die (mysqli_error());
 
                  msg_redirect("Login success please wait..........","index.php","2");
                  //header("Location: index.php");
@@ -334,8 +335,8 @@ function Forgot_pwd(){
 function do_Forgot_pwd(){
          global $admin, $prefix, $db, $email, $admin_name, $error_msg, $site_name ,$site_email, $site_url;
 
-         $result = mysql_query("SELECT * FROM ".$prefix."_admin WHERE admin_name='$admin_name' AND email='$email'");
-         $check = mysql_num_rows($result);
+         $result = mysqli_query("SELECT * FROM ".$prefix."_admin WHERE admin_name='$admin_name' AND email='$email'");
+         $check = mysqli_num_rows($result);
          if($check == 1){
 
          function new_pwd() {
@@ -352,7 +353,7 @@ function do_Forgot_pwd(){
          }
          $new_pwd = new_pwd();
          $md5_password = md5($new_pwd);
-         $sql = mysql_query("UPDATE ".$prefix."_admin SET password='$md5_password' WHERE email='$email'");
+         $sql = mysqli_query("UPDATE ".$prefix."_admin SET password='$md5_password' WHERE email='$email'");
 
 
 

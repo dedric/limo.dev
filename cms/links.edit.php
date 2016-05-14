@@ -1,4 +1,4 @@
-<?PHP
+<?php
 ///////MAKE SURE YOU ADD THIS ON EVERY PAGE//
 include("includes/admin_funcs.inc.php");  ///
 include("includes/config.inc.php");       ///
@@ -25,7 +25,7 @@ if (is_logged_in_admin($admin)) {
   
 function load_links(){
   $row_count == "0";
-  $LSQL = mysql_query('SELECT * FROM site_links ORDER by u_ymd DESC') or die("Invalid Links List Query: " . mysql_error());
+  $LSQL = mysqli_query('SELECT * FROM site_links ORDER by u_ymd DESC') or die("Invalid Links List Query: " . mysqli_error());
   
   echo('<table cellpadding="0" cellspacing="2" border="0" width="900">
 	  <tr><td align="left" valign="top" class="cms_title">MANAGE LINKS:</td></tr>
@@ -36,7 +36,7 @@ function load_links(){
 			  <td class="cms_table_hdr">Link Address</td>
 			  <td class="cms_table_hdr">Thumbnail</td>
 			  <td class="cms_table_hdr">Options</td></tr>');
-	while($l = mysql_fetch_array($LSQL)){
+	while($l = mysqli_fetch_array($LSQL)){
 	  echo	('<tr ');
 		if($row_count == "0"){
 		   echo	('class="cms_table_row_one" onmouseover="this.className=\'cms_table_row_hlt\';" onmouseout="this.className=\'cms_table_row_one\';">');

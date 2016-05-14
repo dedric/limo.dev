@@ -1,4 +1,4 @@
-<?PHP
+<?php
 require_once ('config.php');
 ?>
 <html>
@@ -17,14 +17,14 @@ function jsdel(url) {
     h1 {font-family: Tahoma; font-size: 110%;font-weight: bold}
     p {font-family: Tahoma}
 </style>
-<?PHP
+<?php
 @extract($_GET);
 if(isset($kill_file)){
 	unlink($file_dir);
 }
 ?>
 </head>
-<body onload="browse('open','<?PHP echo $path?>');">
+<body onload="browse('open','<?php echo $path?>');">
 <table cellpadding="0" cellspacing="0" width="900" border="0">
 <tr><td class="cms_title" id="busy">Click on a folder to browse</td>
 <td id="<?=$path?>" title="open" onclick="browse(this.title,this.id);" class="cms_title" align="right"><?=$path?></td></tr>

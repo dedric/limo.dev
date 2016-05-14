@@ -1,4 +1,5 @@
-<?
+<?php
+echo $_SERVER['DOCUMENT_ROOT'];
 include_once($_SERVER['DOCUMENT_ROOT'].'/inc/class.phpmailer.php');
 class MyMailer extends PHPMailer {
     // Set default variables for all new objects
@@ -27,12 +28,12 @@ class MyMailer extends PHPMailer {
 
 
 function echo_html($id) {
-	$db = mysql_connect ($GLOBALS[db_server], $GLOBALS[db_username], $GLOBALS[db_password]) or die ('I cannot connect to the database because: ' . mysql_error());
-	mysql_select_db ($GLOBALS[db_db]); 
+	$db = mysqli_connect($GLOBALS[db_server], $GLOBALS[db_username], $GLOBALS[db_password]) or die ('I cannot connect to the database because: ' . mysqli_error());
+	mysqli_select_db($db,$GLOBALS[db_db]);
 	list($folder,$file) = explode("/",$id);
 	$sql = "SELECT * FROM pages WHERE pagename LIKE '$file' ORDER BY id";
-	$result = mysql_query($sql,$db);
-	$page = mysql_fetch_row($result);
+	$result = mysqli_query($sql,$db);
+	$page = mysqli_fetch_row($result);
 	echo $page[2]; 
 }
 

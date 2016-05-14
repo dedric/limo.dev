@@ -1,0 +1,290 @@
+/*
+ * FCKeditor - The text editor for Internet - http://www.fckeditor.net
+ * Copyright (C) 2003-2008 Frederico Caldeira Knabben
+ *
+ * == BEGIN LICENSE ==
+ *
+ * Licensed under the terms of any of the following licenses at your
+ * choice:
+ *
+ *  - GNU General Public License Version 2 or later (the "GPL")
+ *    http://www.gnu.org/licenses/gpl.html
+ *
+ *  - GNU Lesser General Public License Version 2.1 or later (the "LGPL")
+ *    http://www.gnu.org/licenses/lgpl.html
+ *
+ *  - Mozilla Public License Version 1.1 or later (the "MPL")
+ *    http://www.mozilla.org/MPL/MPL-1.1.html
+ *
+ * == END LICENSE ==
+ *
+ * This is the default CSS file used by the editor area. It defines the
+ * initial font of the editor and background color.
+ *
+ * A user can configure the editor to use another CSS file. Just change
+ * the value of the FCKConfig.EditorAreaCSS key in the configuration
+ * file.
+ */
+
+/**
+ * The "body" styles should match your editor web site, mainly regarding
+ * background color and font family and size.
+ */
+
+body
+{
+	background-color: #F2F2F2;
+	padding: 5px 5px 5px 5px;
+	margin: 0px;
+}
+
+body, td
+{
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 12px;
+}
+
+a[href]
+{
+	color: -moz-hyperlinktext !important;		/* For Firefox... mark as important, otherwise it becomes black */
+	text-decoration: -moz-anchor-decoration;	/* For Firefox 3, otherwise no underline will be used */
+}
+
+.main {
+	background-color: #FFF;
+}
+
+.page_hdr {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: small-caps;
+	text-transform: none;
+	color: #1E8034;
+	text-decoration: none;
+}
+.page_shdr {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: none;
+	color: #333;
+	text-decoration: none;
+}
+.page_background {
+	background-image: url(../images/new/back_follicle2.gif);
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+.ftr_bottom {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: none;
+	color: #FFF;
+	text-decoration: none;
+	background-image: url(../images/new/footer_bottom.gif);
+	background-repeat: repeat-x;
+}
+.ftr_link, .ftr_link:active, .ftr_link:visited {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: none;
+	color: #FFF;
+	text-decoration: none;
+}
+.side_note {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: italic;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: none;
+	color: #1E8034;
+	text-decoration: none;
+	text-align: center;
+}
+
+
+.ftr_link:hover{
+	text-decoration:underline;	
+}
+
+
+.txt {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	color: #333;
+	text-decoration: none;
+}
+.finput {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	color: #666;
+	text-decoration: none;
+	background-color: #EBEBEB;
+	text-indent: 4px;
+	padding: 2px;
+	border: 1px solid #666;
+}
+
+a, a:active, a:visited {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #1E8034;
+	text-decoration: none;
+}
+a:hover{
+	color:#090;
+	text-decoration:underline;
+}
+.required {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #900;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal;
+	font-variant: normal;
+	text-transform: none;
+	text-decoration:none;
+}
+.ftxt{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: none;
+	color: #333;
+	text-decoration: none;
+}
+.left {
+	background-color: #1E8034;
+	background-image: url(../images/left.jpg);
+	background-repeat: repeat-x;
+}
+.htxt {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	color: #FFF;
+	text-decoration: none;
+}
+.home_hdr {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: small-caps;
+	text-transform: none;
+	color: #FFF;
+	text-decoration: none;
+}
+.right {
+	background-color: #1E8080;
+	background-image: url(../images/right.jpg);
+}
+
+.hlink, .hlink:visited, .hlink:active {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #FFF;
+	text-decoration: none;
+}
+.hlink:hover {
+	color: #CCC;
+}
+.middle {
+	background-color: #4E4E4E;
+	background-image: url(../images/middle.jpg);
+	background-repeat: repeat-x;
+}
+
+/**
+ * Just uncomment the following block if you want to avoid spaces between
+ * paragraphs. Remember to apply the same style in your output front end page.
+ */
+
+/*
+p, ul, li
+{
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+*/
+
+/**
+ * Uncomment the following block, or only selected lines if appropriate,
+ * if you have some style items that would break the styles combo box.
+ * You can also write other CSS overrides inside the style block below
+ * as needed and they will be applied to inside the style combo only.
+ */
+
+/*
+.SC_Item *, .SC_ItemSelected *
+{
+	margin: 0px !important;
+	padding: 0px !important;
+	text-indent: 0px !important;
+	clip: auto !important;
+	position: static !important;
+}
+*/
+
+/**
+ * The following are some sample styles used in the "Styles" toolbar command.
+ * You should instead remove them, and include the styles used by the site
+ * you are using the editor in.
+ */
+
+.Bold
+{
+	font-weight: bold;
+}
+
+.Title
+{
+	font-weight: bold;
+	font-size: 18px;
+	color: #cc3300;
+}
+
+.Code
+{
+	border: #8b4513 1px solid;
+	padding-right: 5px;
+	padding-left: 5px;
+	color: #000066;
+	font-family: 'Courier New' , Monospace;
+	background-color: #ff9933;
+}

@@ -1,4 +1,4 @@
-<?PHP
+<?php
 ///////MAKE SURE YOU ADD THIS ON EVERY PAGE//
 include("includes/admin_funcs.inc.php");  ///
 include("includes/config.inc.php");       ///
@@ -25,7 +25,7 @@ if (is_logged_in_admin($admin)) {
   
 function load_results(){
   $row_count == "0";
-  $LSQL = mysql_query('SELECT * FROM site_module_results ORDER by u_ymd DESC') or die("Invalid Result Query: " . mysql_error());
+  $LSQL = mysqli_query('SELECT * FROM site_module_results ORDER by u_ymd DESC') or die("Invalid Result Query: " . mysqli_error());
   
   echo('<table cellpadding="0" cellspacing="2" border="0" width="900">
 	  <tr><td align="left" valign="top" class="cms_title">MANAGE BEFORE &amp; AFTER RESULTS:</td></tr>
@@ -36,7 +36,7 @@ function load_results(){
 			  <td class="cms_table_hdr">Before Thumbnail</td>
 			  <td class="cms_table_hdr">After Thumbnail</td>
 			  <td class="cms_table_hdr">Options</td></tr>');
-	while($l = mysql_fetch_array($LSQL)){
+	while($l = mysqli_fetch_array($LSQL)){
 	  echo	('<tr ');
 		if($row_count == "0"){
 		   echo	('class="cms_table_row_one" onmouseover="this.className=\'cms_table_row_hlt\';" onmouseout="this.className=\'cms_table_row_one\';">');
@@ -105,27 +105,27 @@ function load_results(){
 }
 function do_add_results(){
 @extract($_POST);
-$SQL = mysql_query('INSERT INTO site_module_results (name,o_ymd,u_ymd,b_pic,a_pic,ctext) VALUES 
-													("'.$name.'",NOW(),NOW(),"'.$before.'","'.$after.'","'.$ctext.'")') or die("Invalid Add Result Query: " . mysql_error());
+$SQL = mysqli_query('INSERT INTO site_module_results (name,o_ymd,u_ymd,b_pic,a_pic,ctext) VALUES
+													("'.$name.'",NOW(),NOW(),"'.$before.'","'.$after.'","'.$ctext.'")') or die("Invalid Add Result Query: " . mysqli_error());
 msg_redirect('<span class="success">RESULT ADDED!</span>',''.$_SERVER['PHP_SELF'].'','2');
 }
 
 function do_del_results(){
 @extract($_GET);
-$SQL = mysql_query('DELETE FROM site_module_results WHERE id="'.$id.'" LIMIT 1') or die("Invalid Delete Result Query: " . mysql_error());
+$SQL = mysqli_query('DELETE FROM site_module_results WHERE id="'.$id.'" LIMIT 1') or die("Invalid Delete Result Query: " . mysqli_error());
 msg_redirect('<span class="error">RESULT DELETED!</span>',''.$_SERVER['PHP_SELF'].'','2');
 }
 
 function do_edit_results(){
 @extract($_POST);
-$SQL = mysql_query('UPDATE site_module_results SET name="'.$name.'", ctext="'.$ctext.'", b_pic="'.$before.'", a_pic="'.$after.'", u_ymd=NOW() WHERE id="'.$id.'" LIMIT 1') or die('Invalid Update Result Query: ' . mysql_error());
+$SQL = mysqli_query('UPDATE site_module_results SET name="'.$name.'", ctext="'.$ctext.'", b_pic="'.$before.'", a_pic="'.$after.'", u_ymd=NOW() WHERE id="'.$id.'" LIMIT 1') or die('Invalid Update Result Query: ' . mysqli_error());
 msg_redirect('<span class="success">RESULT UPDATED!</span>',''.$_SERVER['PHP_SELF'].'','2');
 }
 
 function edit_results(){
 @extract($_GET);
-$SQL = mysql_query('SELECT * FROM site_module_results WHERE id="'.$id.'" LIMIT 1') or die('Invalid Edit Result Query: ' . mysql_error());
-$r = mysql_fetch_array($SQL);
+$SQL = mysqli_query('SELECT * FROM site_module_results WHERE id="'.$id.'" LIMIT 1') or die('Invalid Edit Result Query: ' . mysqli_error());
+$r = mysqli_fetch_array($SQL);
 	echo('<table cellpadding="0" cellspacing="2" border="0" width="900">
 		 <form method="POST" action="'.$_SERVER['PHP_SELF'].'">
 			  <tr><td class="cms_title">EDIT BEFORE &amp; AFTER RESULT:</td></tr>

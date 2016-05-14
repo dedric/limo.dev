@@ -1,4 +1,4 @@
-<?PHP
+<?php
 ///////MAKE SURE YOU ADD THIS ON EVERY PAGE//
 include("includes/admin_funcs.inc.php");  ///
 include("includes/config.inc.php");       ///
@@ -16,8 +16,8 @@ if (is_logged_in_admin($admin)) {
 function set_up(){
         global $db, $prefix;
 
-       $sql = mysql_query("SELECT * FROM ".$prefix."_options") or die ("Error:". mysql_error());
-       $r = mysql_fetch_array($sql);
+       $sql = mysqli_query("SELECT * FROM ".$prefix."_options") or die ("Error:". mysqli_error());
+       $r = mysqli_fetch_array($sql);
 
           foreach( $r AS $key => $val ){
                    $$key = stripslashes( $val );
@@ -54,7 +54,7 @@ echo	('<form method="POST" action="site_info.edit.php">
 
 function save(){
       global  $db,$prefix,$xsite_name,$xsite_email,$xsite_url,$xsite_info,$xsite_keywords;
-      $sql =  mysql_query("UPDATE ".$prefix."_options SET  site_name='$xsite_name',site_email='$xsite_email',site_url='$xsite_url',site_info='$xsite_info',site_keywords='$xsite_keywords'") or die ("Error Editing Setup: ". mysql_error());
+      $sql =  mysqli_query("UPDATE ".$prefix."_options SET  site_name='$xsite_name',site_email='$xsite_email',site_url='$xsite_url',site_info='$xsite_info',site_keywords='$xsite_keywords'") or die ("Error Editing Setup: ". mysqli_error());
       
       //print success message and redirect browser
       msg_redirect("Saved!","site_info.edit.php","2");

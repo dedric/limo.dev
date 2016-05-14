@@ -1,4 +1,4 @@
-<?PHP
+<?php
 ///////MAKE SURE YOU ADD THIS ON EVERY PAGE//
 include("includes/admin_funcs.inc.php");  ///
 include("includes/config.inc.php");       ///
@@ -145,4 +145,3 @@ switch ($maa){
                index($admin);
                Break;
 }
-?>

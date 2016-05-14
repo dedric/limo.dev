@@ -1,4 +1,4 @@
-<?PHP
+<?php
 ///////MAKE SURE YOU ADD THIS ON EVERY PAGE//
 include("includes/admin_funcs.inc.php");  ///
 include("includes/config.inc.php");       ///
@@ -26,8 +26,8 @@ if(isset($_GET["view"])){
 	
 	//THE FORM FOR UPDATING THE SELECTED IMAGE IN THE POTFOLIO
 		$QUERY	= "SELECT * FROM site_images WHERE id='".$view."' LIMIT 1";
-		$SQL	= mysql_query($QUERY) or die("Invalid Portfolio Image Query: " . mysql_error());
-		$i		= mysql_fetch_array($SQL);
+		$SQL	= mysqli_query($QUERY) or die("Invalid Portfolio Image Query: " . mysqli_error());
+		$i		= mysqli_fetch_array($SQL);
 		
 echo	('<form action="'.$_SERVER['PHP_SELF'].'" method="POST">
 		  <table cellpadding="0" cellspacing="0" border="0" width="900">
@@ -73,13 +73,13 @@ echo	('<tr><td valign="top" align="left">
 		//IF ITEM IS TO BE UPDATED RUN THIS
 		if($_POST["update"]){
 			$QUERY 	= "UPDATE site_images SET name='".$_POST["title"]."', cat='".$_POST["cat"]."', type='".$_POST['type']."', ymd = NOW() WHERE id='".$_POST["id"]."'";
-			$SQL 	= mysql_query($QUERY) or die("Invalid Update Query: " . mysql_error());
+			$SQL 	= mysqli_query($QUERY) or die("Invalid Update Query: " . mysqli_error());
 			echo	('<span class="success">IMAGE UPDATED SUCCESSFULLY</span>');
 		}
 		
 		if($_GET["delete"]){
 			$QUERY 	= "DELETE FROM site_images WHERE id='".$_GET["delete"]."' LIMIT 1";
-			$SQL 	= mysql_query($QUERY) or die("Invalid Delete Query: " . mysql_error());
+			$SQL 	= mysqli_query($QUERY) or die("Invalid Delete Query: " . mysqli_error());
 			echo	('<span class="success">IMAGE DELETED SUCCESSFULLY</span>');
 		}
 	
@@ -106,12 +106,12 @@ echo	('<tr><td valign="top" align="left">
 
 		
 		//LIST ALL OF THE IMAGES IN THE PORTFOLIO
-		$SQL 	= mysql_query('SELECT * FROM site_images ORDER BY ymd DESC') or die("Invalid Portfolio Query: " . mysql_error());
+		$SQL 	= mysqli_query('SELECT * FROM site_images ORDER BY ymd DESC') or die("Invalid Portfolio Query: " . mysqli_error());
 		
 		$tr = 1;
-		$rws = mysql_num_rows($SQL);
+		$rws = mysqli_num_rows($SQL);
 		
-		while($p = mysql_fetch_array($SQL)){
+		while($p = mysqli_fetch_array($SQL)){
 			if($tr == 1){
 			echo	('<tr>');
 			}
@@ -122,8 +122,8 @@ echo	('<td align="center" valign="top" class="cms_table_row_one" onmouseover="th
 				<img src="../files/image/thumb/'.$p['img'].'" border="1"></a></td></tr>
 		    <tr><td align="center" valign="middle" class="cms_image_name" colspan="2"><a href="'.$_SERVER['PHP_SELF'].'?view='.$p['id'].'" class="cms_image_link">'.$p['name'].'</a></td></tr>');
 
-		$CSQL = mysql_query('SELECT * FROM category_images WHERE id="'.$p['cat'].'" LIMIT 1') or die ('Invalid Image Category Query: ' . mysql_error());
-		$c = mysql_fetch_array($CSQL);
+		$CSQL = mysqli_query('SELECT * FROM category_images WHERE id="'.$p['cat'].'" LIMIT 1') or die ('Invalid Image Category Query: ' . mysqli_error());
+		$c = mysqli_fetch_array($CSQL);
 		echo ('<tr><td align="center" valign="middle" class="cms_cat_name" colspan="2">'.$c['name'].'</td></tr>');
 
 echo	('		<tr><td align="left" valign="middle" class="cms_image_name"><a href="'.$_SERVER['PHP_SELF'].'?view='.$p['id'].'" class="cms_link">

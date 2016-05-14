@@ -1,4 +1,4 @@
-<?PHP
+<?php
 function nav_menu(){
          global $db, $prefix;
 

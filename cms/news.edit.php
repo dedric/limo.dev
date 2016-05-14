@@ -1,4 +1,4 @@
-<?PHP
+<?php
 ///////MAKE SURE YOU ADD THIS ON EVERY PAGE//
 include("includes/admin_funcs.inc.php");  ///
 include("includes/config.inc.php");       ///
@@ -26,7 +26,7 @@ if (is_logged_in_admin($admin)) {
 function load_article(){
   
   $row_count == "0";
-  $SQL = mysql_query('SELECT * FROM site_module_news ORDER by id ASC') or die("Invalid News List Query: " . mysql_error());
+  $SQL = mysqli_query('SELECT * FROM site_module_news ORDER by id ASC') or die("Invalid News List Query: " . mysqli_error());
   
   echo('<table cellpadding="0" cellspacing="2" border="0" width="900">');
   
@@ -41,7 +41,7 @@ function load_article(){
 			  <td class="cms_table_hdr" nowrap>Article Title:</td>
 			  <td class="cms_table_hdr" nowrap>Publish Date:</td>
 			  <td class="cms_table_hdr" nowrap>Options</td></tr>');
-	while($m = mysql_fetch_array($SQL)){
+	while($m = mysqli_fetch_array($SQL)){
 	  echo	('<tr ');
 		if($row_count == "0"){
 		   echo	('class="cms_table_row_one" onmouseover="this.className=\'cms_table_row_hlt\';" onmouseout="this.className=\'cms_table_row_one\';">');
@@ -91,26 +91,26 @@ function load_article(){
 
 function do_add_article(){
 @extract($_POST);
-$SQL = mysql_query('INSERT INTO site_module_news (hdr,p_date,o_ymd,u_ymd,ctext) VALUES ("'.$hdr.'","'.$p_date.'",NOW(),NOW(),"'.$ctext.'")') or die("Invalid Add News Article Query: " . mysql_error());
+$SQL = mysqli_query('INSERT INTO site_module_news (hdr,p_date,o_ymd,u_ymd,ctext) VALUES ("'.$hdr.'","'.$p_date.'",NOW(),NOW(),"'.$ctext.'")') or die("Invalid Add News Article Query: " . mysqli_error());
 msg_redirect('<span class="success">NEWS ARTICLE ADDED!</span>',''.$_SERVER['PHP_SELF'].'','2');
 }
 
 function do_del_article(){
 @extract($_GET);
-$SQL = mysql_query('DELETE FROM site_module_news WHERE id="'.$id.'" LIMIT 1') or die("Invalid Delete News Article Query: " . mysql_error());
+$SQL = mysqli_query('DELETE FROM site_module_news WHERE id="'.$id.'" LIMIT 1') or die("Invalid Delete News Article Query: " . mysqli_error());
 msg_redirect('<span class="error">NEWS ARTICLE DELETED!</span>',''.$_SERVER['PHP_SELF'].'','2');
 }
 
 function do_edit_article(){
 @extract($_POST);
-$SQL = mysql_query('UPDATE site_module_news SET hdr="'.$hdr.'", ctext="'.$ctext.'", p_date="'.$p_date.'", u_ymd=NOW() WHERE id="'.$id.'" LIMIT 1') or die('Invalid Update News Article Query: ' . mysql_error());
+$SQL = mysqli_query('UPDATE site_module_news SET hdr="'.$hdr.'", ctext="'.$ctext.'", p_date="'.$p_date.'", u_ymd=NOW() WHERE id="'.$id.'" LIMIT 1') or die('Invalid Update News Article Query: ' . mysqli_error());
 msg_redirect('<span class="success">NEWS ARTICLE UPDATED!</span>',''.$_SERVER['PHP_SELF'].'','2');
 }
 
 function edit_article(){
 @extract($_GET);
-$SQL = mysql_query('SELECT * FROM site_module_news WHERE id="'.$id.'" LIMIT 1') or die("Invalid Edit News Article Query: " . mysql_error());
-$m = mysql_fetch_array($SQL);
+$SQL = mysqli_query('SELECT * FROM site_module_news WHERE id="'.$id.'" LIMIT 1') or die("Invalid Edit News Article Query: " . mysqli_error());
+$m = mysqli_fetch_array($SQL);
 
 echo  ('<table cellpadding="0" cellspacing="2" border="0" width="900">
 		<form method="POST" action="'.$_SERVER['PHP_SELF'].'">
