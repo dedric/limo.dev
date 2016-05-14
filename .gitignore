@@ -1,0 +1,6 @@
+.idea/
+*.swp
+*.exe
+*.tmp
+*.orig
+*.sql
