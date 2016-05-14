@@ -1,4 +1,4 @@
-<?PHP global $site_name, $site_url, $site_info, $site_email, $tmp_header; ?>
+<?php global $site_name, $site_url, $site_info, $site_email, $tmp_header; ?>
 <html>
 <head>
 <title>Content Management System</title>
@@ -17,13 +17,13 @@
 <tr><td class="cms_header">
 	<table cellpadding="0" cellspacing="0" width="100%">
     <tr><td align="left" class="cms_header_text">
-		<?PHP echo $site_name;?> CMS 3.0 - <a href="../" class="cms_header_link">View Website</a></td>
+		<?php echo $site_name;?> CMS 3.0 - <a href="../" class="cms_header_link">View Website</a></td>
         
-        <?PHP
+        <?php
 		if (is_logged_in_admin($admin)) {
 		
-		$SQL = mysql_query('SELECT * FROM '.$prefix.'_admin WHERE adminid="'.$adminid.'" LIMIT 1') or die ("Invalid User ID: " . mysql_error());
-		$a = mysql_fetch_array($SQL);
+		$SQL = mysqli_query('SELECT * FROM '.$prefix.'_admin WHERE adminid="'.$adminid.'" LIMIT 1') or die ("Invalid User ID: " . mysqli_error());
+		$a = mysqli_fetch_array($SQL);
 		
 		echo	('<td align="right" class="cms_header_text">
 				  <table cellpadding="2" cellspacing="0" border="0" align="right">
@@ -48,7 +48,7 @@
 <tr><td class="cms_menu_bg">
 
 	<!--START THE MENU-->
-    <?PHP include("includes/menu.inc.php"); ?>
+    <?php include("includes/menu.inc.php"); ?>
     <!--END THE MENU-->
     
 </td></tr>

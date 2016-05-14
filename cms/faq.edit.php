@@ -1,4 +1,4 @@
-<?PHP
+<?php
 ///////MAKE SURE YOU ADD THIS ON EVERY PAGE//
 include("includes/admin_funcs.inc.php");  ///
 include("includes/config.inc.php");       ///
@@ -26,7 +26,7 @@ if (is_logged_in_admin($admin)) {
 function load_faq(){
   
   $row_count == "0";
-  $SQL = mysql_query('SELECT * FROM site_module_faq ORDER by id ASC') or die("Invalid FAQ List Query: " . mysql_error());
+  $SQL = mysqli_query('SELECT * FROM site_module_faq ORDER by id ASC') or die("Invalid FAQ List Query: " . mysqli_error());
   
   echo('<table cellpadding="0" cellspacing="2" border="0" width="900">');
   
@@ -40,7 +40,7 @@ function load_faq(){
 		  <tr><td class="cms_table_hdr">ID</td>
 			  <td class="cms_table_hdr">Question:</td>
 			  <td class="cms_table_hdr">Options</td></tr>');
-	while($m = mysql_fetch_array($SQL)){
+	while($m = mysqli_fetch_array($SQL)){
 	  echo	('<tr ');
 		if($row_count == "0"){
 		   echo	('class="cms_table_row_one" onmouseover="this.className=\'cms_table_row_hlt\';" onmouseout="this.className=\'cms_table_row_one\';">');
@@ -79,26 +79,26 @@ function load_faq(){
 
 function do_add_faq(){
 @extract($_POST);
-$SQL = mysql_query('INSERT INTO site_module_faq (ques,o_ymd,u_ymd,ans) VALUES ("'.$ques.'",NOW(),NOW(),"'.$ans.'")') or die("Invalid Add FAQ Query: " . mysql_error());
+$SQL = mysqli_query('INSERT INTO site_module_faq (ques,o_ymd,u_ymd,ans) VALUES ("'.$ques.'",NOW(),NOW(),"'.$ans.'")') or die("Invalid Add FAQ Query: " . mysqli_error());
 msg_redirect('<span class="success">FAQ ADDED!</span>',''.$_SERVER['PHP_SELF'].'','2');
 }
 
 function do_del_faq(){
 @extract($_GET);
-$SQL = mysql_query('DELETE FROM site_module_faq WHERE id="'.$id.'" LIMIT 1') or die("Invalid Delete FAQ Query: " . mysql_error());
+$SQL = mysqli_query('DELETE FROM site_module_faq WHERE id="'.$id.'" LIMIT 1') or die("Invalid Delete FAQ Query: " . mysqli_error());
 msg_redirect('<span class="error">FAQ DELETED!</span>',''.$_SERVER['PHP_SELF'].'','2');
 }
 
 function do_edit_faq(){
 @extract($_POST);
-$SQL = mysql_query('UPDATE site_module_faq SET ques="'.$ques.'", ans="'.$ans.'", u_ymd=NOW() WHERE id="'.$id.'" LIMIT 1') or die('Invalid Update FAQ Query: ' . mysql_error());
+$SQL = mysqli_query('UPDATE site_module_faq SET ques="'.$ques.'", ans="'.$ans.'", u_ymd=NOW() WHERE id="'.$id.'" LIMIT 1') or die('Invalid Update FAQ Query: ' . mysqli_error());
 msg_redirect('<span class="success">FAQ UPDATED!</span>',''.$_SERVER['PHP_SELF'].'','2');
 }
 
 function edit_faq(){
 @extract($_GET);
-$SQL = mysql_query('SELECT * FROM site_module_faq WHERE id="'.$id.'" LIMIT 1') or die("Invalid Edit FAQ Query: " . mysql_error());
-$m = mysql_fetch_array($SQL);
+$SQL = mysqli_query('SELECT * FROM site_module_faq WHERE id="'.$id.'" LIMIT 1') or die("Invalid Edit FAQ Query: " . mysqli_error());
+$m = mysqli_fetch_array($SQL);
 
 echo  ('<table cellpadding="0" cellspacing="2" border="0" width="900">
 		<form method="POST" action="'.$_SERVER['PHP_SELF'].'">

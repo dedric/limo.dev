@@ -1,4 +1,4 @@
-<?PHP
+<?php
 echo "<html>\n"
      ."<head>\n"
      ."<meta http-equiv=\"content-language\" content=\"en-us\">\n"

@@ -1,4 +1,4 @@
-<?PHP
+<?php
 ///////MAKE SURE YOU ADD THIS ON EVERY PAGE//
 include("includes/admin_funcs.inc.php");  ///
 include("includes/config.inc.php");       ///
@@ -26,7 +26,7 @@ if (is_logged_in_admin($admin)) {
 function load_article(){
   
   $row_count == "0";
-  $SQL = mysql_query('SELECT * FROM site_module_articles ORDER by id ASC') or die("Invalid FAQ List Query: " . mysql_error());
+  $SQL = mysqli_query('SELECT * FROM site_module_articles ORDER by id ASC') or die("Invalid FAQ List Query: " . mysqli_error());
   
   echo('<table cellpadding="0" cellspacing="2" border="0" width="900">');
   
@@ -40,7 +40,7 @@ function load_article(){
 		  <tr><td class="cms_table_hdr">ID</td>
 			  <td class="cms_table_hdr">Article Title:</td>
 			  <td class="cms_table_hdr">Options</td></tr>');
-	while($m = mysql_fetch_array($SQL)){
+	while($m = mysqli_fetch_array($SQL)){
 	  echo	('<tr ');
 		if($row_count == "0"){
 		   echo	('class="cms_table_row_one" onmouseover="this.className=\'cms_table_row_hlt\';" onmouseout="this.className=\'cms_table_row_one\';">');
@@ -86,26 +86,26 @@ function load_article(){
 
 function do_add_article(){
 @extract($_POST);
-$SQL = mysql_query('INSERT INTO site_module_articles (hdr,o_ymd,u_ymd,ctext) VALUES ("'.$hdr.'",NOW(),NOW(),"'.$ctext.'")') or die("Invalid Add FAQ Article Query: " . mysql_error());
+$SQL = mysqli_query('INSERT INTO site_module_articles (hdr,o_ymd,u_ymd,ctext) VALUES ("'.$hdr.'",NOW(),NOW(),"'.$ctext.'")') or die("Invalid Add FAQ Article Query: " . mysqli_error());
 msg_redirect('<span class="success">FAQ ARTICLE ADDED!</span>',''.$_SERVER['PHP_SELF'].'','2');
 }
 
 function do_del_article(){
 @extract($_GET);
-$SQL = mysql_query('DELETE FROM site_module_articles WHERE id="'.$id.'" LIMIT 1') or die("Invalid Delete FAQ Article Query: " . mysql_error());
+$SQL = mysqli_query('DELETE FROM site_module_articles WHERE id="'.$id.'" LIMIT 1') or die("Invalid Delete FAQ Article Query: " . mysqli_error());
 msg_redirect('<span class="error">FAQ ARTICLE DELETED!</span>',''.$_SERVER['PHP_SELF'].'','2');
 }
 
 function do_edit_article(){
 @extract($_POST);
-$SQL = mysql_query('UPDATE site_module_articles SET hdr="'.$hdr.'", ctext="'.$ctext.'", u_ymd=NOW() WHERE id="'.$id.'" LIMIT 1') or die('Invalid Update FAQ Article Query: ' . mysql_error());
+$SQL = mysqli_query('UPDATE site_module_articles SET hdr="'.$hdr.'", ctext="'.$ctext.'", u_ymd=NOW() WHERE id="'.$id.'" LIMIT 1') or die('Invalid Update FAQ Article Query: ' . mysqli_error());
 msg_redirect('<span class="success">FAQ ARTICLE UPDATED!</span>',''.$_SERVER['PHP_SELF'].'','2');
 }
 
 function edit_article(){
 @extract($_GET);
-$SQL = mysql_query('SELECT * FROM site_module_articles WHERE id="'.$id.'" LIMIT 1') or die("Invalid Edit FAQ Article Query: " . mysql_error());
-$m = mysql_fetch_array($SQL);
+$SQL = mysqli_query('SELECT * FROM site_module_articles WHERE id="'.$id.'" LIMIT 1') or die("Invalid Edit FAQ Article Query: " . mysqli_error());
+$m = mysqli_fetch_array($SQL);
 
 echo  ('<table cellpadding="0" cellspacing="2" border="0" width="900">
 		<form method="POST" action="'.$_SERVER['PHP_SELF'].'">

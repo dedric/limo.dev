@@ -1,4 +1,4 @@
-<?PHP
+<?php
 //PATHS TO WHERE IMAGES WILL BE STORED
 $path_thumbs = "../files/image/thumb";
 $path_large = "../files/image/large";

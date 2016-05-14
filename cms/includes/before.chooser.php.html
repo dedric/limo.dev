@@ -14,14 +14,14 @@ function select_item(item){
 <link href="../css/CMS_3.0.picker.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<?PHP
+<?php
 include ('../includes/config.inc.php');
    echo	('<table cellpadding="4" cellspacing="2" border="0" width="100%">');
 
-$SQL = mysql_query('SELECT * FROM site_images WHERE cat="3"') or die ('Invalid Images Query: ' . mysql_error());
-$icount = mysql_num_rows($SQL);
+$SQL = mysqli_query('SELECT * FROM site_images WHERE cat="3"') or die ('Invalid Images Query: ' . mysqli_error());
+$icount = mysqli_num_rows($SQL);
 
-   	while ($p = mysql_fetch_array($SQL)) {
+   	while ($p = mysqli_fetch_array($SQL)) {
 
 			$icount = $icount - 1;
 			

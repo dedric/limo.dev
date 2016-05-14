@@ -1,4 +1,4 @@
-<?PHP
+<?php
 ///////MAKE SURE YOU ADD THIS ON EVERY PAGE//
 include("includes/admin_funcs.inc.php");  ///
 include("includes/config.inc.php");       ///
@@ -29,15 +29,15 @@ if (is_logged_in_admin($admin)) {
   //PRE FORM PROCESSING THIS PAGE IS STATIC SO THERE WILL JUST NEED TO BE PROCESSING AND THE FORM
   if(isset($_POST['save_form'])){
   	 //SAVE THE CHANGES
-	 $SQL = mysql_query('UPDATE site_pages SET ctext="'.$ctext1.'" WHERE id="'.$page_id.'" LIMIT 1') or die("Invalid Page Update Query: " . mysql_error());
+	 $SQL = mysqli_query('UPDATE site_pages SET ctext="'.$ctext1.'" WHERE id="'.$page_id.'" LIMIT 1') or die("Invalid Page Update Query: " . mysqli_error());
 	 $page_msg = "Page Updated Successfully";
   }
   
   if(isset($id){
   
   //GET THE VARIABLES
-  $SQL = mysql_query('SELECT * FROM site_pages WHERE id="'.$id.'" LIMIT 1') or die("Invalid Page Text Query: " . mysql_error());
-  $p = mysql_fetch_array($SQL);
+  $SQL = mysqli_query('SELECT * FROM site_pages WHERE id="'.$id.'" LIMIT 1') or die("Invalid Page Text Query: " . mysqli_error());
+  $p = mysqli_fetch_array($SQL);
   
   //PAGE FORM
   echo	('

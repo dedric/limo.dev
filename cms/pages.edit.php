@@ -1,4 +1,4 @@
-<?PHP
+<?php
 ///////MAKE SURE YOU ADD THIS ON EVERY PAGE//
 include("includes/admin_funcs.inc.php");  ///
 include("includes/config.inc.php");       ///
@@ -30,10 +30,10 @@ if (is_logged_in_admin($admin)) {
   if(isset($_POST['save_form'])){
   	 //SAVE THE CHANGES
 	 if($_POST['cols'] == 2){
-	 $SQL = mysql_query('UPDATE site_pages SET ctext="'.$ctext1.'", ctext2="'.$ctext2.'", u_ymd=NOW() WHERE id="'.$page_id.'" LIMIT 1') or die("Invalid Page Update Query: " . mysql_error());
+	 $SQL = mysqli_query('UPDATE site_pages SET ctext="'.$ctext1.'", ctext2="'.$ctext2.'", u_ymd=NOW() WHERE id="'.$page_id.'" LIMIT 1') or die("Invalid Page Update Query: " . mysqli_error());
 	 $page_msg = "Page Update Successfully";
 	 }else{
-	 $SQL = mysql_query('UPDATE site_pages SET ctext="'.$ctext1.'", u_ymd=NOW() WHERE id="'.$page_id.'" LIMIT 1') or die("Invalid Page Update Query: " . mysql_error());
+	 $SQL = mysqli_query('UPDATE site_pages SET ctext="'.$ctext1.'", u_ymd=NOW() WHERE id="'.$page_id.'" LIMIT 1') or die("Invalid Page Update Query: " . mysqli_error());
 	 $page_msg = "Page Updated Successfully";
 	 }
   }
@@ -41,8 +41,8 @@ if (is_logged_in_admin($admin)) {
   if(isset($id)){
   
   //GET THE VARIABLES
-  $SQL = mysql_query('SELECT * FROM site_pages WHERE id="'.$id.'" LIMIT 1') or die("Invalid Page Text Query: " . mysql_error());
-  $p = mysql_fetch_array($SQL);
+  $SQL = mysqli_query('SELECT * FROM site_pages WHERE id="'.$id.'" LIMIT 1') or die("Invalid Page Text Query: " . mysqli_error());
+  $p = mysqli_fetch_array($SQL);
   
   //PAGE FORM
   echo	('
@@ -109,8 +109,8 @@ if (is_logged_in_admin($admin)) {
 			  <td class="cms_table_hdr">Last Updated</td>
 			  <td class="cms_table_hdr">Options</td></tr>');
 
-	$result = mysql_query("SELECT * from ".$prefix."_pages ORDER BY id ASC");
-	while($m = mysql_fetch_array($result)){
+	$result = mysqli_query("SELECT * from ".$prefix."_pages ORDER BY id ASC");
+	while($m = mysqli_fetch_array($result)){
 		
 	$last_updated = date("M d, Y",strtotime($m['u_ymd']));
 	

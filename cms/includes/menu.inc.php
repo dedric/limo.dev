@@ -18,15 +18,15 @@
 </table>
 
 <div id="dropmenu1" class="dropmenudiv">
-<?PHP
-$SQL = mysql_query('SELECT * FROM site_pages ORDER BY id ASC') or die ('Invalid Pages Menu Query: ' . mysql_error());
+<?php
+$SQL = mysqli_query('SELECT * FROM site_pages ORDER BY id ASC') or die ('Invalid Pages Menu Query: ' . mysqli_error());
 
-while($p = mysql_fetch_array($SQL)){
+while($p = mysqli_fetch_array($SQL)){
 	if($p['page'] == 1){
 	echo	('<a href="pages.edit.php?id='.$p['id'].'">'.$p['hdr'].'</a>');
 	}else{
-	$MSQL = mysql_query('SELECT * FROM site_modules WHERE mod_id="'.$p['id'].'" LIMIT 1') or die(' Invalid Modules Menu Query: ' . mysql_error());
-	$m = mysql_fetch_array($MSQL);
+	$MSQL = mysqli_query('SELECT * FROM site_modules WHERE mod_id="'.$p['id'].'" LIMIT 1') or die(' Invalid Modules Menu Query: ' . mysqli_error());
+	$m = mysqli_fetch_array($MSQL);
 	echo	('<a href="'.$m['mod_file'].'">'.$p['hdr'].'</a>');
 	}
 }

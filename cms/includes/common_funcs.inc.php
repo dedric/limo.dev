@@ -1,4 +1,4 @@
-<?PHP
+<?php
 
 function FixForFlash($oldtext){
 $old = array('%','&#160;','-','/r','/n','&amp;','&lt;','&gt', '&');
@@ -26,10 +26,10 @@ return $ct;
 
 function CategorySelect($curcat){
 	$GSQL = 'SELECT * FROM category_images ORDER by ID ASC';
-	$GQUERY = mysql_query($GSQL) or die ("Invalid Gallery Category Query: " . mysql_error());
+	$GQUERY = mysqli_query($GSQL) or die ("Invalid Gallery Category Query: " . mysqli_error());
 	
 $cc = ('<select name="cat" class="finput">');
-		while($g = mysql_fetch_array($GQUERY)){
+		while($g = mysqli_fetch_array($GQUERY)){
 			if($g['id'] == $curcat){
 			$sc = "selected";
 			}else{
@@ -43,16 +43,14 @@ return $cc;
 function CatName($curcat,$curtype){
 	if($curtype == 1){
 		$SQL = ("SELECT * FROM gallery_cats WHERE id='".$curcat."' LIMIT 1");
-		$QUERY = mysql_query($SQL) or die ("Invalid Category Name Query: " . mysql_error());
-		$c = mysql_fetch_array($QUERY);
+		$QUERY = mysqli_query($SQL) or die ("Invalid Category Name Query: " . mysqli_error());
+		$c = mysqli_fetch_array($QUERY);
 		$cn = $c['name'];
 	}elseif($curtype == 2){
 		$SQL = ("SELECT * FROM access_cats WHERE id='".$curcat."' LIMIT 1");
-		$QUERY = mysql_query($SQL) or die ("Invalid Category Name Query: " . mysql_error());
-		$c = mysql_fetch_array($QUERY);
+		$QUERY = mysqli_query($SQL) or die ("Invalid Category Name Query: " . mysqli_error());
+		$c = mysqli_fetch_array($QUERY);
 		$cn = $c['name'];
 	}
 	return $cn;
 }
-
-?>

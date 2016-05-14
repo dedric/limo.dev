@@ -1,4 +1,4 @@
-<?PHP include('cms/includes/config.inc.php');?>
+<?php include('cms/includes/config.inc.php');?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -135,9 +135,9 @@
 					</div>
 				</div>
 								
-                 <?PHP
-    $SQL = mysql_query('SELECT * FROM site_pages WHERE id="1" LIMIT 1') or die('Invalid Page Query: ' . mysql_error());
-    $p = mysql_fetch_array($SQL);
+                 <?php
+    $SQL = mysqli_query('SELECT * FROM site_pages WHERE id="1" LIMIT 1') or die('Invalid Page Query: ' . mysqli_error());
+    $p = mysqli_fetch_array($SQL);
     
     echo	$p['ctext'];
     ?>

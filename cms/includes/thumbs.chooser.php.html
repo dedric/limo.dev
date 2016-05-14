@@ -14,7 +14,7 @@ function select_item(item){
 <link href="../css/CMS_3.0.picker.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<?PHP
+<?php
    echo	('<table cellpadding="4" cellspacing="2" border="0" width="100%">');
    $dir = '../../files/image/thumbs/';
    
