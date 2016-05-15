@@ -30,10 +30,10 @@ if (is_logged_in_admin($admin)) {
   if(isset($_POST['save_form'])){
   	 //SAVE THE CHANGES
 	 if($_POST['cols'] == 2){
-	 $SQL = mysqli_query('UPDATE site_pages SET ctext="'.$ctext1.'", ctext2="'.$ctext2.'", u_ymd=NOW() WHERE id="'.$page_id.'" LIMIT 1') or die("Invalid Page Update Query: " . mysqli_error());
+	 $SQL = mysqli_query($mdb, 'UPDATE site_pages SET ctext="'.$ctext1.'", ctext2="'.$ctext2.'", u_ymd=NOW() WHERE id="'.$page_id.'" LIMIT 1') or die("Invalid Page Update Query: " . mysqli_error($mdb));
 	 $page_msg = "Page Update Successfully";
 	 }else{
-	 $SQL = mysqli_query('UPDATE site_pages SET ctext="'.$ctext1.'", u_ymd=NOW() WHERE id="'.$page_id.'" LIMIT 1') or die("Invalid Page Update Query: " . mysqli_error());
+	 $SQL = mysqli_query($mdb, 'UPDATE site_pages SET ctext="'.$ctext1.'", u_ymd=NOW() WHERE id="'.$page_id.'" LIMIT 1') or die("Invalid Page Update Query: " . mysqli_error($mdb));
 	 $page_msg = "Page Updated Successfully";
 	 }
   }
@@ -41,7 +41,7 @@ if (is_logged_in_admin($admin)) {
   if(isset($id)){
   
   //GET THE VARIABLES
-  $SQL = mysqli_query('SELECT * FROM site_pages WHERE id="'.$id.'" LIMIT 1') or die("Invalid Page Text Query: " . mysqli_error());
+  $SQL = mysqli_query($mdb,'SELECT * FROM site_pages WHERE id="'.$id.'" LIMIT 1') or die("Invalid Page Text Query: " . mysqli_error($mdb));
   $p = mysqli_fetch_array($SQL);
   
   //PAGE FORM
@@ -109,7 +109,7 @@ if (is_logged_in_admin($admin)) {
 			  <td class="cms_table_hdr">Last Updated</td>
 			  <td class="cms_table_hdr">Options</td></tr>');
 
-	$result = mysqli_query("SELECT * from ".$prefix."_pages ORDER BY id ASC");
+	$result = mysqli_query($mdb, "SELECT * from ".$prefix."_pages ORDER BY id ASC");
 	while($m = mysqli_fetch_array($result)){
 		
 	$last_updated = date("M d, Y",strtotime($m['u_ymd']));

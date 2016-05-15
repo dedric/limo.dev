@@ -18,7 +18,7 @@ function select_item(item){
 include ('../includes/config.inc.php');
    echo	('<table cellpadding="4" cellspacing="2" border="0" width="100%">');
 
-$SQL = mysqli_query('SELECT * FROM site_images WHERE cat="3"') or die ('Invalid Images Query: ' . mysqli_error());
+$SQL = mysqli_query($mdb, 'SELECT * FROM site_images WHERE cat="3"') or die ('Invalid Images Query: ' . mysqli_error($mdb));
 $icount = mysqli_num_rows($SQL);
 
    	while ($p = mysqli_fetch_array($SQL)) {

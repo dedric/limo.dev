@@ -14,9 +14,9 @@ if (is_logged_in_admin($admin)) {
 		  include("includes/hdr.inc.php");
 
 function set_up(){
-        global $db, $prefix;
+        global $mdb, $prefix;
 
-       $sql = mysqli_query("SELECT * FROM ".$prefix."_options") or die ("Error:". mysqli_error());
+       $sql = mysqli_query($mdb,"SELECT * FROM ".$prefix."_options") or die ("Error:". mysqli_error($mdb));
        $r = mysqli_fetch_array($sql);
 
           foreach( $r AS $key => $val ){
@@ -53,8 +53,8 @@ echo	('<form method="POST" action="site_info.edit.php">
 
 
 function save(){
-      global  $db,$prefix,$xsite_name,$xsite_email,$xsite_url,$xsite_info,$xsite_keywords;
-      $sql =  mysqli_query("UPDATE ".$prefix."_options SET  site_name='$xsite_name',site_email='$xsite_email',site_url='$xsite_url',site_info='$xsite_info',site_keywords='$xsite_keywords'") or die ("Error Editing Setup: ". mysqli_error());
+      global  $mdb,$prefix,$xsite_name,$xsite_email,$xsite_url,$xsite_info,$xsite_keywords;
+      $sql =  mysqli_query($mdb, "UPDATE ".$prefix."_options SET  site_name='$xsite_name',site_email='$xsite_email',site_url='$xsite_url',site_info='$xsite_info',site_keywords='$xsite_keywords'") or die ("Error Editing Setup: ". mysqli_error($mdb));
       
       //print success message and redirect browser
       msg_redirect("Saved!","site_info.edit.php","2");
@@ -85,5 +85,3 @@ include("includes/ftr.inc.php");
       msg_redirect($error_msg,"index.php","1");
       exit();
 }
-
-?>

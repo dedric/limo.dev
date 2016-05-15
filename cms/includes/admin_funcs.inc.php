@@ -1,6 +1,6 @@
 <?php
 //skip the functions file if somebody call it directly from the browser.
-if (eregi("functions.php", $_SERVER['SCRIPT_NAME'])) {
+if (preg_match("functions.php", $_SERVER['SCRIPT_NAME'])) {
     Header("Location: index.php"); die();
 }
 
@@ -43,25 +43,25 @@ $user = base64_encode($user);
 }
 
 foreach ($_GET as $sec_key => $secvalue) {
-	if ((eregi("<[^>]*script*\"?[^>]*>", $secvalue)) ||
-	(eregi("<[^>]*object*\"?[^>]*>", $secvalue)) ||
-	(eregi("<[^>]*iframe*\"?[^>]*>", $secvalue)) ||
-	(eregi("<[^>]*applet*\"?[^>]*>", $secvalue)) ||
-	(eregi("<[^>]*meta*\"?[^>]*>", $secvalue)) ||
-	(eregi("<[^>]*style*\"?[^>]*>", $secvalue)) ||
-	(eregi("<[^>]*form*\"?[^>]*>", $secvalue)) ||
-	(eregi("<[^>]*img*\"?[^>]*>", $secvalue)) ||
-	(eregi("<[^>]*onmouseover*\"?[^>]*>", $secvalue)) ||
-	(eregi("\([^>]*\"?[^)]*\)", $secvalue)) ||
-	(eregi("\"", $secvalue))) {
+	if ((preg_match("/<[^>]*script*\"?[^>]*>/i", $secvalue)) ||
+	(preg_match("/<[^>]*object*\"?[^>]*>/i", $secvalue)) ||
+	(preg_match("/<[^>]*iframe*\"?[^>]*>/i", $secvalue)) ||
+	(preg_match("/<[^>]*applet*\"?[^>]*>/i", $secvalue)) ||
+	(preg_match("/<[^>]*meta*\"?[^>]*>/i", $secvalue)) ||
+	(preg_match("/<[^>]*style*\"?[^>]*>/i", $secvalue)) ||
+	(preg_match("/<[^>]*form*\"?[^>]*>/i", $secvalue)) ||
+	(preg_match("/<[^>]*img*\"?[^>]*>/i", $secvalue)) ||
+	(preg_match("/<[^>]*onmouseover*\"?[^>]*>/i", $secvalue)) ||
+	(preg_match("/([^>]*\"?[^)]*/i)", $secvalue)) ||
+	(preg_match("/\"/", $secvalue))) {
 		die ("not allowed");
 	}
 }
 foreach ($_POST as $secvalue) {
-	if ((eregi("<[^>]*onmouseover*\"?[^>]*>", $secvalue)) ||
-        (eregi("<[^>]script*\"?[^>]*>", $secvalue)) ||
-        (eregi("<[^>]meta*\"?[^>]*>", $secvalue)) ||
-        (eregi("<[^>]style*\"?[^>]*>", $secvalue))) {
+	if ((preg_match("/<[^>]*onmouseover*\"?[^>]*>/i", $secvalue)) ||
+        (preg_match("<[^>]script*\"?[^>]*>/i", $secvalue)) ||
+        (preg_match("<[^>]meta*\"?[^>]*>/i", $secvalue)) ||
+        (preg_match("<[^>]style*\"?[^>]*>/i", $secvalue))) {
 		die ("not allowed");
 	}
 }
@@ -74,18 +74,18 @@ include ("$ROOT_DIR/config.inc.php");
 
 include ("$ROOT_DIR/mysql.class.php");
 
-$db = new sql_db($db_host, $db_username, $db_password, $databse_name, false);
+$db = new sql_db($db_host, $db_username, $db_password, $database_name, false);
 
 if(!$db->db_connect_id) {
-      include("includes/hdr.inc.php");
+      include("hdr.inc.php");
 
       //if connection to database/login faild, print error.
       echo "<br><font color=\"red\"><h5><br><center>Error:</b><br><hr><br>
             <b>Connection to database has faild!<br>
             check mysql server/database name/username/password </center>
             <br><br><br><br><br><br><br><br><br>";
-              echo mysqli_error();
-      include("includes/ftr.inc.php");
+      echo mysqli_error($db);
+      include("ftr.inc.php");
       die();
 }
 //load the site options and info from db.
@@ -125,7 +125,7 @@ include ("$ROOT_DIR/../lang/$language.php");
     return 0;
 }*/
 
-$db = new sql_db($db_host, $db_username, $db_password, $databse_name, false);
+$db = new sql_db($db_host, $db_username, $db_password, $database_name, false);
 
 function is_logged_in_admin($admin) {
     global $db,$prefix;
@@ -215,9 +215,9 @@ function login_form(){
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //a login function to call the login form.
 function Login(){
-		include("includes/hdr.inc.php");
+		include("hdr.inc.php");
         login_form();
-		include("includes/ftr.inc.php");
+		include("ftr.inc.php");
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //this function will do the login for you.
@@ -227,7 +227,7 @@ function do_login(){
 
          //check admin name and password fields.
          if((!$admin_name) || (!$password)){
-		 		include("includes/hdr.inc.php");
+		 		include("hdr.inc.php");
                 $reqmsg= ('<span class="cms_login_error">Required!</font>)');
 
                 if(trim(empty($admin_name))){
@@ -237,13 +237,13 @@ function do_login(){
                    $pass_err= $reqmsg;
                 }
                 login_form();
-				include("includes/ftr.inc.php");
+				include("ftr.inc.php");
                 exit();
          }
 
          //encyrpt  password for more Security
          $md5_pass = md5($password);
-         $sql = mysqli_query("SELECT * FROM ".$prefix."_admin WHERE admin_name='$admin_name' AND password='$md5_pass'");
+         $sql = mysqli_query($db,"SELECT * FROM ".$prefix."_admin WHERE admin_name='$admin_name' AND password='$md5_pass'");
          $login_check = mysqli_num_rows($sql);
          ///////////////////////////////////////////////////////////////////////
          if($login_check > 0){
@@ -262,20 +262,20 @@ function do_login(){
 
                  setcookie("admin","$info",0);
 
-                 mysqli_query("UPDATE ".$prefix."_admin SET ipaddress='$REMOTE_ADDR', lastlogin=NOW() WHERE adminid='$adminid'") or die (mysqli_error());
+                 mysqli_query($db, "UPDATE ".$prefix."_admin SET ipaddress='$REMOTE_ADDR', lastlogin=NOW() WHERE adminid='$adminid'") or die (mysqli_error($db));
 
                  msg_redirect("Login success please wait..........","index.php","2");
                  //header("Location: index.php");
             }//end while
          }else{
-                //include("header.php");
-                $error_msg = ('<span class="cms_login_error">Login error. Please check admin name/password.</span>');
-                unset($admin_name);
-                unset($password);
-				include("includes/hdr.inc.php");
-                login_form();
-				include("includes/ftr.inc.php");
-                exit();
+            //include("header.php");
+            $error_msg = ('<span class="cms_login_error">Login error. Please check admin name/password.</span>');
+            unset($admin_name);
+            unset($password);
+            include("hdr.inc.php");
+            login_form();
+            include("ftr.inc.php");
+            exit();
          }
 }
 
@@ -292,7 +292,6 @@ function Logout($admin) {
     unset($cookie);
 
     setcookie("admin", false);
-    $admin = "";
     header("Location: index.php");
     
 }
@@ -327,75 +326,68 @@ global $error_msg;
 }
 function Forgot_pwd(){
          global $admin, $prefix, $db;
-		 include("includes/hdr.inc.php");
+		 include("hdr.inc.php");
          Forgot_pwd_form();
-		 include("includes/ftr.inc.php");
+		 include("ftr.inc.php");
+}
+
+function new_pwd() {
+    $chars = "abchefghjkmnpqrstuvwxyz0123456789";
+    srand((double)microtime()*1000000);
+    $i = 0;
+    while ($i <= 7) {
+        $num = rand() % 33;
+        $pwd = substr($chars, $num, 1);
+        $i++;
+    }
+    return $pwd;
 }
 
 function do_Forgot_pwd(){
-         global $admin, $prefix, $db, $email, $admin_name, $error_msg, $site_name ,$site_email, $site_url;
+    global $admin, $prefix, $db, $email, $admin_name, $error_msg, $site_name ,$site_email, $site_url;
 
-         $result = mysqli_query("SELECT * FROM ".$prefix."_admin WHERE admin_name='$admin_name' AND email='$email'");
-         $check = mysqli_num_rows($result);
-         if($check == 1){
+    $result = mysqli_query($db,"SELECT * FROM ".$prefix."_admin WHERE admin_name='$admin_name' AND email='$email'");
+    $check = mysqli_num_rows($result);
+         
+    if($check == 1){
+        $new_pwd = new_pwd();
+        $md5_password = md5($new_pwd);
+        mysqli_query($db,"UPDATE ".$prefix."_admin SET password='$md5_password' WHERE email='$email'");
+        
+        $subject = "New Content Management System Password";
+        $message = "
+        Hello $admin_name,
+        
+        You are receiving this email because you have (or someone pretending to be you has) requested a new password be sent for your account on $site_name.
+        
+        Here it is below.
+        --------------------------
+        admin name: $admin_name
+        Password: $new_pwd
+        --------------------------
+        You may login below:
+        $site_url
+        
+        You can of course change this password yourself via the profile page. If you have any difficulties please contact the webmaster.
+        
+        --
+        -Thanks
+        $site_name
+        
+        This email was automatically generated.
+        Please do not respond to this email or it will ignored.";
+        
+        mail($email,$subject,$message, "FROM: $site_name <$site_email>");
+        include("hdr.inc.php");
+        echo "Your New Pass has been emailed to your email.";
+        echo "<br>please wait...";
+        include("ftr.inc.php");
 
-         function new_pwd() {
-                  $chars = "abchefghjkmnpqrstuvwxyz0123456789";
-                  srand((double)microtime()*1000000);
-                  $i = 0;
-                  while ($i <= 7) {
-                            $num = rand() % 33;
-                            $tmp = substr($chars, $num, 1);
-                            $pwd = $pwd . $tmp;
-                            $i++;
-                  }
-                  return $pwd;
-         }
-         $new_pwd = new_pwd();
-         $md5_password = md5($new_pwd);
-         $sql = mysqli_query("UPDATE ".$prefix."_admin SET password='$md5_password' WHERE email='$email'");
-
-
-
-
-
-
-$subject = "New Content Management System Password";
-$message = "
-Hello $admin_name,
-
-You are receiving this email because you have (or someone pretending to be you has) requested a new password be sent for your account on $site_name.
-
-Here it is below.
---------------------------
-admin name: $admin_name
-Password: $new_pwd
---------------------------
-You may login below:
-$site_url
-
-You can of course change this password yourself via the profile page. If you have any difficulties please contact the webmaster.
-
---
--Thanks
-$site_name
-
-This email was automatically generated.
-Please do not respond to this email or it will ignored.";
-
-         mail($email,$subject,$message, "FROM: $site_name <$site_email>");
-		 include("includes/hdr.inc.php");
-         echo "Your New Pass has been emailed to your email.";
-         echo "<br>please wait...";
-		 include("includes/ftr.inc.php");
-
-         }else{
-				include("includes/hdr.inc.php");
-                Forgot_pwd_form();
-                echo ('<center><span class="cms_login_error">Error: Wrong admin name/email</span></center><br>');
-			    include("includes/ftr.inc.php");
-				
-         }
+    }else{
+        include("hdr.inc.php");
+        Forgot_pwd_form();
+        echo ('<center><span class="cms_login_error">Error: Wrong admin name/email</span></center><br>');
+        include("ftr.inc.php");
+        
+    }
 }
-
-?>

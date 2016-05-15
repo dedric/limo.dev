@@ -5,7 +5,7 @@
 <link href="css/CMS_3.0.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript">
     function jsdel(url) {
-        var answer = confirm("<? echo "Are you sure you want to delete?"; ?>")
+        var answer = confirm("<?php echo "Are you sure you want to delete?"; ?>");
          if (answer){
              window.location = ""+ url +"";
          }
@@ -22,7 +22,7 @@
         <?php
 		if (is_logged_in_admin($admin)) {
 		
-		$SQL = mysqli_query('SELECT * FROM '.$prefix.'_admin WHERE adminid="'.$adminid.'" LIMIT 1') or die ("Invalid User ID: " . mysqli_error());
+		$SQL = mysqli_query($mdb,'SELECT * FROM '.$prefix.'_admin WHERE adminid="'.$adminid.'" LIMIT 1') or die ("Invalid User ID: " . mysqli_error($mdb));
 		$a = mysqli_fetch_array($SQL);
 		
 		echo	('<td align="right" class="cms_header_text">

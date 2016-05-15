@@ -6,7 +6,7 @@ require_once ('config.php');
 <script type="text/javascript" src="browse.js"></script>
 <script type="text/javascript">
 function jsdel(url) {
-	var answer = confirm("<? echo "Are you sure you want to delete?"; ?>")
+	var answer = confirm("<?php echo "Are you sure you want to delete?"; ?>");
 	 if (answer){
 		 window.location = ""+ url +"";
 	 }
