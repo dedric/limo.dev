@@ -1,4 +1,4 @@
-<?PHP include('cms/includes/config.inc.php');?>
+<?php include('cms/includes/config.inc.php');?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>

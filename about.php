@@ -1,4 +1,4 @@
-<?PHP include('cms/includes/config.inc.php');?>
+<?php include('cms/includes/config.inc.php');?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -93,9 +93,9 @@
 				<div class="container_12">
 					<div class="grid_12">
 						<h3>About DBH Limo</h3>
-						  <?PHP
-    $SQL = mysql_query('SELECT * FROM site_pages WHERE id="2" LIMIT 1') or die('Invalid Page Query: ' . mysql_error());
-    $p = mysql_fetch_array($SQL);
+						  <?php
+    $SQL = mysqli_query($mdb, 'SELECT * FROM site_pages WHERE id="2" LIMIT 1') or die('Invalid Page Query: ' . mysqli_error($mdb));
+    $p = mysqli_fetch_array($SQL);
     
     echo	$p['ctext'];
     ?>
