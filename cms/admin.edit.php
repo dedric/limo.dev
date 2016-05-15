@@ -6,8 +6,7 @@ include("includes/config.inc.php");       ///
 /////////////////////////////////////////////
 
 function load_admins(){
-    global $mdb;
-    global $db,$fullname,$admin_name,$password,$email,$admin_taken_err,$email_taken_err,$prefix;
+    global $mdb,$fullname,$admin_name,$password,$email,$admin_taken_err,$email_taken_err,$prefix;
 
     $row_count = "0";
 
@@ -67,8 +66,7 @@ function load_admins(){
 }
 
 function do_add_admins(){
-    global $mdb;
-    global  $db,$prefix,$fullname,$admin_name,$password,$email,$admin_taken_err,$email_taken_err;
+    global  $mdb,$prefix,$fullname,$admin_name,$password,$email,$admin_taken_err,$email_taken_err;
 
     if ((!$fullname) or (!$admin_name)  or (!$password)){
 
@@ -78,8 +76,8 @@ function do_add_admins(){
     }
 
     //--nothing empty? everything is okay? lets do the register.
-    $email_check = $db->sql_numrows($db->sql_query("SELECT email FROM ".$prefix."_admin WHERE email=".$email));
-    $admin_check = $db->sql_numrows($db->sql_query("SELECT admin_name FROM ".$prefix."_admin WHERE admin_name=".$admin_name));
+    $email_check = mysqli_num_rows(mysqli_query($mdb,"SELECT email FROM ".$prefix."_admin WHERE email=".$email));
+    $admin_check = mysqli_num_rows(mysqli_query($mdb,"SELECT admin_name FROM ".$prefix."_admin WHERE admin_name=".$admin_name));
     if(($email_check > 0) || ($admin_check > 0)){
         //define error message for usage in multi plces.
         $exist_msg= "<font class=\"error\">"._ALREADY_TAKEN."</font>";

@@ -1,6 +1,6 @@
 <?php
 //skip the functions file if somebody call it directly from the browser.
-if (preg_match("functions.php", $_SERVER['SCRIPT_NAME'])) {
+if (preg_match("/functions.php/", $_SERVER['SCRIPT_NAME'])) {
     Header("Location: index.php"); die();
 }
 
@@ -74,9 +74,7 @@ include ("$ROOT_DIR/config.inc.php");
 
 include ("$ROOT_DIR/mysql.class.php");
 
-$db = new sql_db($db_host, $db_username, $db_password, $database_name, false);
-
-if(!$db->db_connect_id) {
+if(!$mdb) {
       include("hdr.inc.php");
 
       //if connection to database/login faild, print error.
@@ -84,13 +82,13 @@ if(!$db->db_connect_id) {
             <b>Connection to database has faild!<br>
             check mysql server/database name/username/password </center>
             <br><br><br><br><br><br><br><br><br>";
-      echo mysqli_error($db);
+      echo mysqli_error($mdb);
       include("ftr.inc.php");
       die();
 }
 //load the site options and info from db.
-$options_sql = $db->sql_query("SELECT * FROM ".$prefix."_options");
-$options = $db->sql_fetchrow($options_sql);
+$options_sql = mysqli_query($mdb,"SELECT * FROM ".$prefix."_options");
+$options = mysqli_fetch_row($options_sql);
 
 $site_name = stripslashes($options['site_name']);
 $site_email= stripslashes($options['site_email']);
@@ -125,10 +123,8 @@ include ("$ROOT_DIR/../lang/$language.php");
     return 0;
 }*/
 
-$db = new sql_db($db_host, $db_username, $db_password, $database_name, false);
-
 function is_logged_in_admin($admin) {
-    global $db,$prefix;
+    global $mdb,$prefix;
 	
 	
 
@@ -138,8 +134,8 @@ function is_logged_in_admin($admin) {
     $adminid = intval($adminid);
         
     if ($adminid != "" AND $passwd != "") {
-        $result = $db->sql_query("SELECT password FROM ". $prefix ."_admin WHERE adminid='".$adminid."'");
-	$row = $db->sql_fetchrow($result);
+        $result =mysqli_query($mdb,"SELECT password FROM ". $prefix ."_admin WHERE adminid='".$adminid."'");
+	$row = mysqli_fetch_row($result);
         $pass = $row['password'];
 	if($pass == $passwd && $pass != "") {
            return 1;
@@ -150,7 +146,7 @@ function is_logged_in_admin($admin) {
 
 
 function msg_redirect($msg,$url,$seconds){
-         global $site_name, $site_url;
+         global $site_name;
 
 echo('<html dir="'._LTR_RTL.'">
 	  <head>
@@ -222,7 +218,7 @@ function Login(){
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //this function will do the login for you.
 function do_login(){
-         global $prefix,$db,$admin_name,$password, $remember, $admin_err,$pass_err,$error_msg,$REMOTE_ADDR;
+         global $prefix,$mdb,$admin_name,$password, $remember, $admin_err,$pass_err,$error_msg,$REMOTE_ADDR;
 
 
          //check admin name and password fields.
@@ -243,7 +239,7 @@ function do_login(){
 
          //encyrpt  password for more Security
          $md5_pass = md5($password);
-         $sql = mysqli_query($db,"SELECT * FROM ".$prefix."_admin WHERE admin_name='$admin_name' AND password='$md5_pass'");
+         $sql = mysqli_query($mdb,"SELECT * FROM ".$prefix."_admin WHERE admin_name='$admin_name' AND password='$md5_pass'");
          $login_check = mysqli_num_rows($sql);
          ///////////////////////////////////////////////////////////////////////
          if($login_check > 0){
@@ -262,7 +258,7 @@ function do_login(){
 
                  setcookie("admin","$info",0);
 
-                 mysqli_query($db, "UPDATE ".$prefix."_admin SET ipaddress='$REMOTE_ADDR', lastlogin=NOW() WHERE adminid='$adminid'") or die (mysqli_error($db));
+                 mysqli_query($mdb, "UPDATE ".$prefix."_admin SET ipaddress='$REMOTE_ADDR', lastlogin=NOW() WHERE adminid='$adminid'") or die (mysqli_error($mdb));
 
                  msg_redirect("Login success please wait..........","index.php","2");
                  //header("Location: index.php");
@@ -325,7 +321,7 @@ global $error_msg;
 		  
 }
 function Forgot_pwd(){
-         global $admin, $prefix, $db;
+         global $admin, $prefix;
 		 include("hdr.inc.php");
          Forgot_pwd_form();
 		 include("ftr.inc.php");
@@ -344,15 +340,15 @@ function new_pwd() {
 }
 
 function do_Forgot_pwd(){
-    global $admin, $prefix, $db, $email, $admin_name, $error_msg, $site_name ,$site_email, $site_url;
+    global $admin, $prefix, $mdb, $email, $admin_name, $error_msg, $site_name ,$site_email, $site_url;
 
-    $result = mysqli_query($db,"SELECT * FROM ".$prefix."_admin WHERE admin_name='$admin_name' AND email='$email'");
+    $result = mysqli_query($mdb,"SELECT * FROM ".$prefix."_admin WHERE admin_name='$admin_name' AND email='$email'");
     $check = mysqli_num_rows($result);
          
     if($check == 1){
         $new_pwd = new_pwd();
         $md5_password = md5($new_pwd);
-        mysqli_query($db,"UPDATE ".$prefix."_admin SET password='$md5_password' WHERE email='$email'");
+        mysqli_query($mdb,"UPDATE ".$prefix."_admin SET password='$md5_password' WHERE email='$email'");
         
         $subject = "New Content Management System Password";
         $message = "

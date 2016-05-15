@@ -6,7 +6,7 @@ include("includes/common_funcs.inc.php"); ///
 include("fckeditor/fckeditor.php");       ///
 /////////////////////////////////////////////
 
-global $db, $prefix;
+global $prefix;
 
 //CHECK TO SEE IF THE USER IS LOGGED IN
 if (is_logged_in_admin($admin)) {

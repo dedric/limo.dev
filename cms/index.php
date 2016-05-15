@@ -6,7 +6,6 @@ include("includes/common_funcs.inc.php"); ///
 /////////////////////////////////////////////
 
 function index($admin) {
-     global $db, $prefix;
 
      //CHECK TO SEE IF THE USER IS LOGGED IN
      if (is_logged_in_admin($admin)) {

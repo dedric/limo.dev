@@ -11,7 +11,7 @@
  ***************************************************************************/
 
 
-if (preg_match("mysql.class.php", $_SERVER['SCRIPT_NAME'])) {
+if (preg_match("/mysql.class.php/", $_SERVER['SCRIPT_NAME'])) {
     Header("Location: index.php"); die();
 }
 
