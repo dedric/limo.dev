@@ -1,4 +1,3 @@
-<?php include('cms/includes/config.inc.php');?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -94,11 +93,12 @@
 					<div class="grid_12">
 						<h3>Rates</h3>
 						  <?php
-    $SQL = mysqli_query($mbd,'SELECT * FROM site_pages WHERE id="5" LIMIT 1') or die('Invalid Page Query: ' . mysqli_error($mbd));
-    $p = mysqli_fetch_array($SQL);
-    
-    echo	$p['ctext'];
-    ?>
+						    include('cms/includes/config.inc.php');
+						  	global $mdb;
+							$SQL = mysqli_query($mbd,'SELECT * FROM site_pages WHERE id="5" LIMIT 1') or die('Invalid Page Query: ' . mysqli_error($mbd));
+							$p = mysqli_fetch_array($SQL);
+    						echo $p['ctext'];
+						  ?>
 						
 					</div>
 					<div class="clear"></div>

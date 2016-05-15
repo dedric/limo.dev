@@ -122,7 +122,3 @@ define("_YOUR_INFO_HAS_BEEN_CHANGES","Your information has been successfully cha
 define("_ADMIN_LOGIN_ERR","Error login: Please check admin username or password");
 define("_DEL","Del");
 define("_SAVECHANGES","Save Changes");
-define("","");
-define("","");
-
-?>

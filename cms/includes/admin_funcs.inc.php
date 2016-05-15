@@ -59,9 +59,9 @@ foreach ($_GET as $sec_key => $secvalue) {
 }
 foreach ($_POST as $secvalue) {
 	if ((preg_match("/<[^>]*onmouseover*\"?[^>]*>/i", $secvalue)) ||
-        (preg_match("<[^>]script*\"?[^>]*>/i", $secvalue)) ||
-        (preg_match("<[^>]meta*\"?[^>]*>/i", $secvalue)) ||
-        (preg_match("<[^>]style*\"?[^>]*>/i", $secvalue))) {
+        (preg_match("/<[^>]script*\"?[^>]*>/i", $secvalue)) ||
+        (preg_match("/<[^>]meta*\"?[^>]*>/i", $secvalue)) ||
+        (preg_match("/<[^>]style*\"?[^>]*>/i", $secvalue))) {
 		die ("not allowed");
 	}
 }
@@ -100,7 +100,7 @@ $tmp_footer = stripslashes($options['tmp_footer']);
 $validate = intval($options['validate']);
 
 //load the language
-include ("$ROOT_DIR/../lang/$language.php");
+include ("$ROOT_DIR/../lang/english.php");
 
 //global function for checkig whethar user is logged in or not.
 //you will notice we will use it everwhere in the script.
