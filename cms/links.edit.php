@@ -24,10 +24,11 @@ if (is_logged_in_admin($admin)) {
   include("includes/hdr.inc.php");
   
 function load_links(){
-  $row_count == "0";
-  $LSQL = mysqli_query('SELECT * FROM site_links ORDER by u_ymd DESC') or die("Invalid Links List Query: " . mysqli_error());
-  
-  echo('<table cellpadding="0" cellspacing="2" border="0" width="900">
+	global $mdb;
+	$row_count = "0";
+	$LSQL = mysqli_query($mdb,'SELECT * FROM site_links ORDER by u_ymd DESC') or die("Invalid Links List Query: " . mysqli_error($mdb));
+
+	echo('<table cellpadding="0" cellspacing="2" border="0" width="900">
 	  <tr><td align="left" valign="top" class="cms_title">MANAGE LINKS:</td></tr>
 	  <tr><td align="left" valign="top" class="cms_form_box">
 		  <table cellpadding="2" cellspacing="0" border="0" width="100%">
@@ -40,44 +41,44 @@ function load_links(){
 	  echo	('<tr ');
 		if($row_count == "0"){
 		   echo	('class="cms_table_row_one" onmouseover="this.className=\'cms_table_row_hlt\';" onmouseout="this.className=\'cms_table_row_one\';">');
-		   $row_count++;		   
+		   $row_count++;
 		}else{
 		   echo	('class="cms_table_row_two" onmouseover="this.className = \'cms_table_row_hlt\';" onmouseout="this.className=\'cms_table_row_two\';">');
 		   $row_count = "0";
 		}
-		
+
 	  echo	('<td class="cms_table_cell">'.$l['id'].'</td>
 			  <td class="cms_table_cell">'.$l['hdr'].'</td>
 			  <td class="cms_table_cell">'.$l['address'].'</td>
 			  <td class="cms_table_cell">'.$l['img'].'</td>
 			  <td class="cms_table_cell"> <a href="link.edit.php?ct=edit_link&id='.$l['id'].'" class="cms_table_cell_link">
-			  	  						 [ <img src="images/edit_link.gif" border="0" valign="middle"> Edit Link]</a>&nbsp;&nbsp;
-                  						 <a href="javascript:jsdel(\'link.edit.php?ct=do_del_link&id='.$l[id].'\')" class="cms_table_cell_link">
+										 [ <img src="images/edit_link.gif" border="0" valign="middle"> Edit Link]</a>&nbsp;&nbsp;
+										 <a href="javascript:jsdel(\'link.edit.php?ct=do_del_link&id='.$l[id].'\')" class="cms_table_cell_link">
 										 [ <img src="images/delete.gif" border="0" valign="middle"> Delete Link]</a></td></tr>
 			');
 	}
 	echo	('</table>
-		      </td></tr>
+			  </td></tr>
 			  <form method="POST" action="'.$_SERVER['PHP_SELF'].'">
 			  <tr><td class="cms_title">ADD LINK:</td></tr>
 			  <tr><td align="left" valign="top">
 			  <table cellpadding="0" cellspacing="2" border="0">
 			  <tr><td class="cms_form_text" nowrap>Link Name:</td>
-			  	  <td class="cms_form_box" colspan="2"><input type="text" name="link_name" class="cms_form_field"></td>
+				  <td class="cms_form_box" colspan="2"><input type="text" name="link_name" class="cms_form_field"></td>
 				  <td rowspan="3" class="cms_form_text" valign="top" align="center" width="96">
 				  <img src="images/preview.gif" name="preview" border="0" id="preview"></td></tr>
 			  <tr><td class="cms_form_text">Address:</td>
-			  	  <td class="cms_form_box" colspan="2"><input type="text" name="address" class="cms_form_field"></td></tr>
+				  <td class="cms_form_box" colspan="2"><input type="text" name="address" class="cms_form_field"></td></tr>
 			  <tr><td class="cms_form_text">Thumbnail:</td>
-			  	  <td class="cms_form_box"><input type="text" id="thumbnail" name="thumbnail" class="cms_form_field" value="" width="100%"></td>
+				  <td class="cms_form_box"><input type="text" id="thumbnail" name="thumbnail" class="cms_form_field" value="" width="100%"></td>
 				  <td class="cms_form_text" valign="middle" align="right">
-		  						   <a href="#" onClick="
+								   <a href="#" onClick="
 								   dataitem = window.open(\'includes/thumbs.chooser.php\',\'dataitem\',\'toolbar=0,menubar=0,scrollbars=1,height=500,width=500\');
 								   dataitem.targetitem = getElementById(\'thumbnail\');
 								   dataitem.targetPreview = getElementById(\'preview\')">
 								   <img src="images/pick_thumbnail.gif" valign="middle" align="right"></a></td></tr>
-			  
-			  <tr><td align="right" valign="top" colspan="4"></td></tr>	
+
+			  <tr><td align="right" valign="top" colspan="4"></td></tr>
 			  </table>
 			  </td></tr>
 			  </table>
@@ -115,5 +116,3 @@ switch ($ct){
  login_form();
  include("includes/ftr.inc.php");
 }
-
-?>

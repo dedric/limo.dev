@@ -11,7 +11,7 @@
  ***************************************************************************/
 
 
-if (eregi("mysql.class.php", $_SERVER['SCRIPT_NAME'])) {
+if (preg_match("mysql.class.php", $_SERVER['SCRIPT_NAME'])) {
     Header("Location: index.php"); die();
 }
 
@@ -39,7 +39,7 @@ class sql_db
 
 		if($this->persistency)
 		{
-			$this->db_connect_id = @mysqli_pconnect('p:'.$this->server, $this->user, $this->password);
+			$this->db_connect_id = @mysqli_connect('p:'.$this->server, $this->user, $this->password);
 		}
 		else
 		{
@@ -106,7 +106,7 @@ class sql_db
 		}
 		else
 		{
-			return ( $transaction == END_TRANSACTION ) ? true : false;
+			return ( $transaction == "END_TRANSACTION" ) ? true : false;
 		}
 	}
 
@@ -121,7 +121,7 @@ class sql_db
 		}
 		if($query_id)
 		{
-			$result = @mysqli_num_rows($query_id);
+			$result = @mysqli_num_rows($this->query_result);
 			return $result;
 		}
 		else

@@ -10,18 +10,16 @@ echo "<html>\n"
 ?>
 <script type="text/javascript">
 function jsdel(url) {
-    var answer = confirm("<? echo "Are you sure you want to delete?"; ?>")
+    var answer = confirm("<?php echo "Are you sure you want to delete?"; ?>");
      if (answer){
          window.location = ""+ url +"";
      }
 }
 </script>
-<?
+<?php
 echo "<link rel=\"stylesheet\" href=\"../style.css\" type=\"text/css\">\n"
      ."</head>\n\n\n\n\n"
      ."<body topmargin=\"20\" leftmargin=\"20\" rightmargin=\"20\" bgcolor=\"#cfcfcf\">\n\n\n";
-
-
 
 include("navigation.php");
 

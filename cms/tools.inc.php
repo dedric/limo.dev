@@ -30,9 +30,9 @@ class MyMailer extends PHPMailer {
 function echo_html($id) {
 	$db = mysqli_connect($GLOBALS[db_server], $GLOBALS[db_username], $GLOBALS[db_password]) or die ('I cannot connect to the database because: ' . mysqli_error());
 	mysqli_select_db($db,$GLOBALS[db_db]);
-	list($folder,$file) = explode("/",$id);
+	$file = explode("/",$id);
 	$sql = "SELECT * FROM pages WHERE pagename LIKE '$file' ORDER BY id";
-	$result = mysqli_query($sql,$db);
+	$result = mysqli_query($db,$sql);
 	$page = mysqli_fetch_row($result);
 	echo $page[2]; 
 }

@@ -232,8 +232,8 @@ if(isset($_POST["submit"])){
 	
 	//ADD THE IMAGE TO THE PORTFOLIO
 	$QUERY = "INSERT INTO site_images (name, type, cat, ymd, img) VALUES ('".$_POST["name"]."','0','".$_POST['cat']."',NOW(),'".$new_name.$rand_name.".".$file_ext."')";
-	$SQL = mysqli_query($QUERY) or die("Invalid Add to Pictures Query: " . mysqli_error());
-	$l = mysqli_insert_id();
+	$SQL = mysqli_query($mdb, $QUERY) or die("Invalid Add to Pictures Query: " . mysqli_error($mdb));
+	$l = mysqli_insert_id($mdb);
 		
 	$error_msg = ('<span class="error">UPLOAD SUCCESSFUL.</span>');
     msg_redirect($error_msg,"pictures.edit.php?view=".$l."","1");

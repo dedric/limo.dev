@@ -136,7 +136,7 @@
 				</div>
 								
                  <?php
-    $SQL = mysqli_query('SELECT * FROM site_pages WHERE id="1" LIMIT 1') or die('Invalid Page Query: ' . mysqli_error());
+    $SQL = mysqli_query($mdb, 'SELECT * FROM site_pages WHERE id="1" LIMIT 1') or die('Invalid Page Query: ' . mysqli_error($mdb));
     $p = mysqli_fetch_array($SQL);
     
     echo	$p['ctext'];

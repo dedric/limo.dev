@@ -26,7 +26,7 @@ if(isset($_GET["view"])){
 	
 	//THE FORM FOR UPDATING THE SELECTED IMAGE IN THE POTFOLIO
 		$QUERY	= "SELECT * FROM site_images WHERE id='".$view."' LIMIT 1";
-		$SQL	= mysqli_query($QUERY) or die("Invalid Portfolio Image Query: " . mysqli_error());
+		$SQL	= mysqli_query($mdb, $QUERY) or die("Invalid Portfolio Image Query: " . mysqli_error($mdb));
 		$i		= mysqli_fetch_array($SQL);
 		
 echo	('<form action="'.$_SERVER['PHP_SELF'].'" method="POST">
@@ -73,13 +73,13 @@ echo	('<tr><td valign="top" align="left">
 		//IF ITEM IS TO BE UPDATED RUN THIS
 		if($_POST["update"]){
 			$QUERY 	= "UPDATE site_images SET name='".$_POST["title"]."', cat='".$_POST["cat"]."', type='".$_POST['type']."', ymd = NOW() WHERE id='".$_POST["id"]."'";
-			$SQL 	= mysqli_query($QUERY) or die("Invalid Update Query: " . mysqli_error());
+			$SQL 	= mysqli_query($mdb, $QUERY) or die("Invalid Update Query: " . mysqli_error($mdb));
 			echo	('<span class="success">IMAGE UPDATED SUCCESSFULLY</span>');
 		}
 		
 		if($_GET["delete"]){
 			$QUERY 	= "DELETE FROM site_images WHERE id='".$_GET["delete"]."' LIMIT 1";
-			$SQL 	= mysqli_query($QUERY) or die("Invalid Delete Query: " . mysqli_error());
+			$SQL 	= mysqli_query($mdb, $QUERY) or die("Invalid Delete Query: " . mysqli_error($mdb));
 			echo	('<span class="success">IMAGE DELETED SUCCESSFULLY</span>');
 		}
 	
@@ -106,7 +106,7 @@ echo	('<tr><td valign="top" align="left">
 
 		
 		//LIST ALL OF THE IMAGES IN THE PORTFOLIO
-		$SQL 	= mysqli_query('SELECT * FROM site_images ORDER BY ymd DESC') or die("Invalid Portfolio Query: " . mysqli_error());
+		$SQL 	= mysqli_query($mdb, 'SELECT * FROM site_images ORDER BY ymd DESC') or die("Invalid Portfolio Query: " . mysqli_error($mdb));
 		
 		$tr = 1;
 		$rws = mysqli_num_rows($SQL);
@@ -122,7 +122,7 @@ echo	('<td align="center" valign="top" class="cms_table_row_one" onmouseover="th
 				<img src="../files/image/thumb/'.$p['img'].'" border="1"></a></td></tr>
 		    <tr><td align="center" valign="middle" class="cms_image_name" colspan="2"><a href="'.$_SERVER['PHP_SELF'].'?view='.$p['id'].'" class="cms_image_link">'.$p['name'].'</a></td></tr>');
 
-		$CSQL = mysqli_query('SELECT * FROM category_images WHERE id="'.$p['cat'].'" LIMIT 1') or die ('Invalid Image Category Query: ' . mysqli_error());
+		$CSQL = mysqli_query($mdb, 'SELECT * FROM category_images WHERE id="'.$p['cat'].'" LIMIT 1') or die ('Invalid Image Category Query: ' . mysqli_error($mdb));
 		$c = mysqli_fetch_array($CSQL);
 		echo ('<tr><td align="center" valign="middle" class="cms_cat_name" colspan="2">'.$c['name'].'</td></tr>');
 
